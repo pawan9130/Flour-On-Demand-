@@ -1,0 +1,49 @@
+.orders-container {
+  padding: 24px;
+  min-height: 100vh;
+  background: linear-gradient(180deg, #f7f8fc 0%, #ffffff 100%);
+}
+
+.orders-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+.orders-header h1 { margin: 0 0 8px; font-size: 2.5rem; color: #2d3748; }
+.orders-header p { margin: 0; color: #718096; font-size: 1.1rem; }
+
+.tabs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.tab-card {
+  background: #fff;
+  border: 2px solid #e2e8f0;
+  border-radius: 20px;
+  padding: 32px 24px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+.tab-card:hover { transform: translateY(-4px); border-color: #667eea; box-shadow: 0 12px 24px rgba(102, 126, 234, 0.15); }
+.tab-icon { font-size: 3rem; margin-bottom: 16px; }
+.tab-card h3 { margin: 0 0 8px; font-size: 1.5rem; color: #2d3748; font-weight: 600; }
+.tab-card p { margin: 0; color: #718096; font-size: 0.95rem; }
+
+@media (max-width: 900px) {
+  .tabs-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 600px) {
+  .tabs-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 768px) {
+  .tabs-grid { grid-template-columns: 1fr; gap: 16px; }
+  .tab-card { padding: 24px 16px; }
+  .orders-header h1 { font-size: 2rem; }
+}

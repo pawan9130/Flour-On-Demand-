@@ -1,0 +1,9 @@
+<div class="payout-mgmt">
+  <h3>Payout Queue</h3>
+  <div *ngIf="queue.length===0">No payouts pending</div>
+  <div *ngFor="let p of queue" class="payout-row">
+    <div>{{ p.shop }} — ₹{{ p.amount }}</div>
+    <div>{{ p.period }}</div>
+    <div><button (click)="process(p)">Process</button></div>
+  </div>
+</div>

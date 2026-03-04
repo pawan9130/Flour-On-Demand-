@@ -1,0 +1,15 @@
+<div class="business-hours">
+  <h3>Business Hours</h3>
+  <div formArrayName="days" *ngIf="days.length">
+    <div *ngFor="let d of days.controls; let i = index" [formGroupName]="i" class="day-row">
+      <label><input type="checkbox" formControlName="enabled" /> {{ $any(d.get('day')?.value) || 'Day' }}</label>
+      <div class="shifts">
+        <div *ngFor="let s of $any(d.get('shifts'))">
+          Open <input type="time" [value]="s.open" /> Close <input type="time" [value]="s.close" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="actions"><button (click)="save()">Save Hours</button></div>
+</div>

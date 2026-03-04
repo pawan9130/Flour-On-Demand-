@@ -1,0 +1,7 @@
+<div class="my-reviews container">
+  <h3>My Reviews</h3>
+  <div *ngFor="let r of reviews" class="card">
+    <div><b>{{r.shop}}</b> — {{r.rating}}★</div>
+    <div>{{r.text}}</div>
+  </div>
+</div>

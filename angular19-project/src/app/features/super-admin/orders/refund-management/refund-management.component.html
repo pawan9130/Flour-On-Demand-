@@ -1,0 +1,16 @@
+<div class="refunds">
+  <h3>Refund Requests</h3>
+  <table>
+    <thead><tr><th>Order</th><th>Customer</th><th>Amount</th><th>Reason</th><th>Status</th><th>Action</th></tr></thead>
+    <tbody>
+      <tr *ngFor="let r of refunds">
+        <td>{{r.orderId}}</td>
+        <td>{{r.customer}}</td>
+        <td>₹{{r.amount}}</td>
+        <td>{{r.reason}}</td>
+        <td>{{r.status}}</td>
+        <td><button (click)="process(r)">Process</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

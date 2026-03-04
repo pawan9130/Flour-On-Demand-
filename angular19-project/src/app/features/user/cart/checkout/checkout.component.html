@@ -1,0 +1,29 @@
+<div class="checkout">
+  <div *ngIf="step===1">
+    <h3>Delivery Address</h3>
+    <p>(Address selector component placeholder)</p>
+    <button (click)="next()">Next</button>
+  </div>
+
+  <div *ngIf="step===2">
+    <h3>Delivery Slot</h3>
+    <p>Choose a slot (placeholder)</p>
+    <button (click)="prev()">Back</button>
+    <button (click)="next()">Next</button>
+  </div>
+
+  <div *ngIf="step===3">
+    <h3>Payment Method</h3>
+    <label><input type="radio" name="pay" [(ngModel)]="payment" value="cod" /> Cash on Delivery</label>
+    <label><input type="radio" name="pay" [(ngModel)]="payment" value="online" /> Online</label>
+    <button (click)="prev()">Back</button>
+    <button (click)="next()">Next</button>
+  </div>
+
+  <div *ngIf="step===4">
+    <h3>Review & Place</h3>
+    <div *ngFor="let it of items">{{it.type || it.model?.grains?.[0]?.name || 'Item'}}</div>
+    <button (click)="prev()">Back</button>
+    <button (click)="placeOrder()">Place Order</button>
+  </div>
+</div>

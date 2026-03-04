@@ -1,0 +1,76 @@
+<div class="admin-details" *ngIf="admin">
+  <div class="header">
+    <button (click)="back()">Back</button>
+    <img [src]="'https://i.pravatar.cc/80?u=' + admin.email" alt="avatar" />
+    <div class="info">
+      <h2>{{ admin.name }}</h2>
+      <div>{{ admin.email }}</div>
+      <div>{{ admin.shopName }}</div>
+      <div>Status: {{ admin.status }}</div>
+    </div>
+    <div class="actions">
+      <button (click)="approve()">Approve</button>
+      <button (click)="suspend()">Suspend</button>
+    </div>
+  </div>
+
+  <div class="tabs">
+    <button (click)="setTab('overview')">Overview</button>
+    <button (click)="setTab('shop')">Shop</button>
+    <button (click)="setTab('orders')">Orders</button>
+    <button (click)="setTab('earnings')">Earnings</button>
+    <button (click)="setTab('reviews')">Reviews</button>
+    <button (click)="setTab('performance')">Performance</button>
+  </div>
+
+  <div class="tab-body">
+    <div *ngIf="activeTab==='overview'">
+      <h3>Overview</h3>
+      <div>Joined: {{ admin.joinedOn | date }}</div>
+      <div>Orders: {{ admin.totalOrders }}</div>
+      <div>Revenue: ₹{{ admin.totalRevenue }}</div>
+    </div>
+
+    <div *ngIf="activeTab==='shop'">
+      <h3>Shop Details</h3>
+      <div>Shop: {{ admin.shopName }}</div>
+      <!-- more shop info here -->
+    </div>
+
+    <div *ngIf="activeTab==='orders'">
+      <h3>Orders history</h3>
+      <div>Orders list (mock)</div>
+    </div>
+
+    <div *ngIf="activeTab==='earnings'">
+      <h3>Earnings</h3>
+      <div>Summary: ₹{{ admin.totalRevenue }}</div>
+    </div>
+
+    <div *ngIf="activeTab==='reviews'">
+      <h3>Reviews</h3>
+      <div>No reviews (mock)</div>
+    </div>
+
+    <div *ngIf="activeTab==='performance'">
+      <h3>Performance charts</h3>
+      <div>Charts placeholder</div>
+    </div>
+  </div>
+</div>
+<div class="admin-details" *ngIf="admin">
+  <div class="header">
+    <h3>{{admin.name}}</h3>
+    <div>{{admin.email}} • {{admin.phone}}</div>
+    <div>Shop: {{admin.shopName}}</div>
+  </div>
+
+  <div class="tabs">
+    <nav><a>Overview</a> | <a>Orders</a> | <a>Earnings</a> | <a>Reviews</a></nav>
+    <section>
+      <h4>Overview</h4>
+      <div>Total Orders: {{admin.totalOrders}}</div>
+      <div>Total Revenue: ₹{{admin.totalRevenue}}</div>
+    </section>
+  </div>
+</div>

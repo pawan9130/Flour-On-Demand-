@@ -1,0 +1,29 @@
+.super-sidebar{
+  width: 220px;
+  background:#0f1724;
+  color: #fff;
+  height:100vh;
+  position:sticky;
+  top:0;
+  padding:12px 10px;
+  box-sizing:border-box;
+  transition:width .22s ease;
+}
+.super-sidebar .brand{display:flex;align-items:center;justify-content:space-between;padding:6px 4px}
+.super-sidebar .logo{font-weight:700;background:#08101a;padding:6px 8px;border-radius:4px}
+.super-sidebar .collapse-btn{background:transparent;border:0;color:#fff;font-size:18px;cursor:pointer}
+.super-sidebar ul{list-style:none;padding:8px 0;margin:0}
+.super-sidebar li{padding:10px 6px}
+.super-sidebar a{color:inherit;text-decoration:none;display:block}
+.super-sidebar.collapsed{width:64px}
+.super-sidebar.collapsed .brand .logo{display:none}
+.super-sidebar.collapsed ul li{padding:10px 6px;text-align:center}
+.super-sidebar.collapsed ul li a{font-size:12px}
+
+/* adjust adjacent content when collapsed */
+.super-layout .main{display:flex}
+.super-layout .content{flex:1;padding:20px;transition:margin-left .22s ease}
+.super-sidebar + .content{margin-left:0}
+@media(min-width:800px){
+  .super-sidebar + .content{margin-left:0}
+}

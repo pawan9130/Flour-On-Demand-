@@ -1,0 +1,22 @@
+<div class="cart-page">
+  <h3>Your Cart</h3>
+  <div *ngIf="items.length===0" class="empty">Cart is empty. <a routerLink="/user/browse">Browse Shops</a></div>
+
+  <div *ngFor="let it of items; let i = index" class="cart-item">
+    <div class="left">{{it.type || it.model?.grains?.[0]?.name || 'Item'}}</div>
+    <div class="center">Qty: {{it.qty || 1}}</div>
+    <div class="right">₹{{(it.price || it.priceBreakup || 0)}}</div>
+    <div class="actions">
+      <button (click)="decrease(i)">-</button>
+      <button (click)="increase(i)">+</button>
+      <button (click)="remove(i)">Remove</button>
+    </div>
+  </div>
+
+  <aside class="summary">
+    <div>Subtotal: ₹{{total}}</div>
+    <div>Delivery: ₹0</div>
+    <div><strong>Total: ₹{{total}}</strong></div>
+    <a routerLink="/user/checkout">Proceed to Checkout</a>
+  </aside>
+</div>

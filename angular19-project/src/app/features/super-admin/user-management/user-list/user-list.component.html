@@ -1,0 +1,50 @@
+<div class="sa-user-list">
+  <div class="toolbar">
+    <input placeholder="Search users..." [(ngModel)]="q" (keyup.enter)="load()" />
+    <button (click)="load()">Search</button>
+    <button (click)="bulkDelete()">Delete Selected</button>
+  </div>
+
+  <div class="grid">
+    <div *ngFor="let u of users" class="user-card">
+      <input type="checkbox" (change)="toggle(u)" />
+      <img [src]="'https://i.pravatar.cc/48?u=' + u.email"/>
+      <div class="meta">
+        <div class="name" (click)="view(u)">{{ u.name }}</div>
+        <div class="email">{{ u.email }}</div>
+        <div class="status">{{ u.status }}</div>
+      </div>
+      <div class="quick">
+        <button (click)="view(u)">Details</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="user-list">
+  <div class="filters">
+    <input placeholder="Search name/email" [(ngModel)]="q" />
+    <button (click)="load()">Search</button>
+    <div class="summary">Total: {{total}}</div>
+  </div>
+
+  <table>
+    <thead><tr><th>ID</th><th>Name</th><th>Email</th><th>Phone</th><th>Status</th><th>Verified</th><th>Orders</th><th>Spent</th><th>Actions</th></tr></thead>
+    <tbody>
+      <tr *ngFor="let u of users">
+        <td>{{u.id}}</td>
+        <td><a [routerLink]="['/super-admin/users', u.id]">{{u.name}}</a></td>
+        <td>{{u.email}}</td>
+        <td>{{u.phone}}</td>
+        <td>{{u.status}}</td>
+        <td>{{u.verified ? 'Yes' : 'No'}}</td>
+        <td>{{u.totalOrders}}</td>
+        <td>₹{{u.totalSpent}}</td>
+        <td>
+          <button (click)="block(u)">Block</button>
+          <button (click)="unblock(u)">Unblock</button>
+          <button (click)="remove(u)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

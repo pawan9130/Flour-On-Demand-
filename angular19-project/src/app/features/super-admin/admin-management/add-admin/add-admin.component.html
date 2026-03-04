@@ -1,0 +1,33 @@
+<div class="add-admin">
+  <h2>Add Admin</h2>
+  <form class="single" (ngSubmit)="save()">
+    <section>
+      <label>User ID <input [(ngModel)]="model.userId" name="userId" /></label>
+      <label>Password <input type="password" [(ngModel)]="model.password" name="password" /></label>
+      <label>Name <input [(ngModel)]="model.name" name="name" /></label>
+      <label>Email <input [(ngModel)]="model.email" name="email" type="email" /></label>
+      <label>Phone <input [(ngModel)]="model.phone" name="phone" /></label>
+      <label>Shop Name <input [(ngModel)]="model.shopName" name="shopName" /></label>
+      <label>Address <input [(ngModel)]="model.address" name="address" /></label>
+    </section>
+
+    <section>
+      <h4>Permissions</h4>
+      <label><input type="checkbox" [(ngModel)]="permissions['orders']" name="permOrders" /> Orders</label>
+      <label><input type="checkbox" [(ngModel)]="permissions['products']" name="permProducts" /> Products</label>
+      <label>Commission % <input type="number" [(ngModel)]="commission.percent" name="commPercent" /></label>
+    </section>
+
+    <section>
+      <h4>Supporting documents</h4>
+      <input type="file" (change)="onFile($event)" />
+      <div *ngIf="docPreview"><img [src]="docPreview" style="max-width:200px"/></div>
+    </section>
+
+    <div class="actions">
+      <button type="submit" [disabled]="saving">Create Admin</button>
+      <button type="button" (click)="cancel()">Cancel</button>
+    </div>
+  </form>
+</div>
+

@@ -1,0 +1,7 @@
+.wizard{background:#fff;padding:16px;border-radius:8px}
+.steps{font-weight:600;margin-bottom:8px}
+.grain-grid{display:flex;flex-wrap:wrap;gap:12px}
+.grain-card{width:140px;background:#fafafa;padding:8px;border-radius:6px}
+.nav{margin-top:12px}
+
+@media(max-width:768px){.grain-card{width:100%}}

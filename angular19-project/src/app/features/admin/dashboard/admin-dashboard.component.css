@@ -1,0 +1,5 @@
+.admin-dashboard .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:12px}
+.card{background:#fff;padding:12px;border-radius:6px}
+.charts{background:#fff;padding:12px;border-radius:6px;margin-bottom:12px}
+.recent{background:#fff;padding:12px;border-radius:6px}
+@media(max-width:800px){.admin-dashboard .stats{grid-template-columns:repeat(2,1fr)}}

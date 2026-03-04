@@ -1,0 +1,12 @@
+<div class="orders-page">
+  <div class="tabs">
+    <button (click)="setTab('all')" [class.active]="tab==='all'">All Orders</button>
+    <button (click)="setTab('active')" [class.active]="tab==='active'">Active</button>
+    <button (click)="setTab('completed')" [class.active]="tab==='completed'">Completed</button>
+    <button (click)="setTab('cancelled')" [class.active]="tab==='cancelled'">Cancelled</button>
+  </div>
+
+  <div class="list">
+    <app-order-card *ngFor="let o of orders" [order]="o"></app-order-card>
+  </div>
+</div>

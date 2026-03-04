@@ -1,0 +1,4 @@
+.product-list .header{display:flex;justify-content:space-between;align-items:center}
+.tabs{margin:8px 0}
+.products-table{width:100%;border-collapse:collapse}
+.products-table th, .products-table td{padding:8px;border-bottom:1px solid #eee}

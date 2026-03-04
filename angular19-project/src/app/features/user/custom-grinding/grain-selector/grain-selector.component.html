@@ -1,0 +1,10 @@
+<div class="grain-grid">
+  <div *ngFor="let g of available" class="grain-card">
+    <label>
+      <input type="checkbox" [checked]="g.quantityKg>0" (change)="toggleSelect(g,$any($event.target).checked)" />
+      <div class="name">{{g.name}}</div>
+    </label>
+    <div class="price">₹{{g.basePricePerKg}} / kg</div>
+    <div *ngIf="g.quantityKg>0" class="qty">Qty: <input type="number" [value]="g.quantityKg" (change)="updateQty(g, +$any($event.target).value)" min="0.5" step="0.5" /></div>
+  </div>
+</div>

@@ -1,0 +1,25 @@
+<div class="shop-settings">
+  <h3>Payment Settings</h3>
+  <label><input type="checkbox" [checked]="form.value.acceptCOD" (change)="onToggle('acceptCOD',$event)" /> Accept COD</label>
+  <label><input type="checkbox" [checked]="form.value.onlinePayment" (change)="onToggle('onlinePayment',$event)" /> Online Payment</label>
+  <label>UPI ID <input [value]="form.value.upiId" (input)="onInput('upiId',$event)" /></label>
+  <label>Bank Account <input [value]="form.value.bankAccount" (input)="onInput('bankAccount',$event)" /></label>
+
+  <h3>Notification Settings</h3>
+  <label><input type="checkbox" [checked]="form.value.emailNotifications" (change)="onToggle('emailNotifications',$event)" /> Email Notifications</label>
+  <label><input type="checkbox" [checked]="form.value.smsNotifications" (change)="onToggle('smsNotifications',$event)" /> SMS Notifications</label>
+  <label><input type="checkbox" [checked]="form.value.orderAlertSound" (change)="onToggle('orderAlertSound',$event)" /> New order alert sound</label>
+  <label><input type="checkbox" [checked]="form.value.lowStockAlert" (change)="onToggle('lowStockAlert',$event)" /> Low stock alert</label>
+
+  <h3>Print Settings</h3>
+  <label>Invoice template <select (change)="onSelect('invoiceTemplate',$event)">
+    <option value="default">Default</option>
+    <option value="compact">Compact</option>
+  </select></label>
+  <label>Kitchen receipt format <select (change)="onSelect('kitchenReceiptFormat',$event)">
+    <option value="standard">Standard</option>
+  </select></label>
+  <label><input type="checkbox" [checked]="form.value.autoPrint" (change)="onToggle('autoPrint',$event)" /> Auto print new orders</label>
+
+  <div class="actions"><button (click)="save()">Save Settings</button></div>
+</div>

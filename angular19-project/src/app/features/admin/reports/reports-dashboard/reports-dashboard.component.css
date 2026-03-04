@@ -1,0 +1,5 @@
+.reports-dashboard .header{display:flex;justify-content:space-between;align-items:center}
+.reports-dashboard .cards{display:flex;gap:12px;margin-top:12px}
+.reports-dashboard .card{padding:12px;border:1px solid #eee;border-radius:6px;flex:1}
+.reports-dashboard .range label{margin-right:8px}
+.quick-links{margin-top:12px}

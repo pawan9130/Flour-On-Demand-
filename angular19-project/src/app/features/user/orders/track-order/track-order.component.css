@@ -1,0 +1,4 @@
+.track .progress{display:flex;gap:8px;margin:12px 0}
+.track .step{padding:8px;background:#fafafa;border-radius:6px}
+.track .step.done{background:#def7ec}
+.map{height:160px;background:#eee;margin-top:12px;border-radius:6px}

@@ -1,0 +1,20 @@
+<div class="general-settings">
+  <h3>General Settings</h3>
+  <label>Platform name: <input [(ngModel)]="settings.platformName" /></label>
+  <label>Contact email: <input [(ngModel)]="settings.contactEmail" /></label>
+  <label>Support phone: <input [(ngModel)]="settings.supportPhone" /></label>
+  <label>Address: <input [(ngModel)]="settings.address" /></label>
+  <hr />
+  <h4>Regional</h4>
+  <label>Currency: <input [(ngModel)]="settings.currency" /></label>
+  <label>Currency symbol: <input [(ngModel)]="settings.currencySymbol" /></label>
+  <label>Timezone: <input [(ngModel)]="settings.timezone" /></label>
+  <label>Date format: <input [(ngModel)]="settings.dateFormat" /></label>
+  <label>Language: <input [(ngModel)]="settings.language" /></label>
+  <hr />
+  <h4>Business rules</h4>
+  <label>Min order value: <input type="number" [(ngModel)]="settings.minOrderValue" /></label>
+  <label>Max order value: <input type="number" [(ngModel)]="settings.maxOrderValue" /></label>
+  <label>Cancel limit (hrs): <input type="number" [(ngModel)]="settings.cancelLimitHours" /></label>
+  <div style="margin-top:8px"><button (click)="save()">Save</button></div>
+</div>

@@ -1,0 +1,23 @@
+<div class="reports-dashboard">
+  <div class="header">
+    <h2>Reports & Analytics</h2>
+    <div class="range">
+      <label>From <input type="date" [(ngModel)]="range.from" /></label>
+      <label>To <input type="date" [(ngModel)]="range.to" /></label>
+      <button (click)="load()">Apply</button>
+    </div>
+  </div>
+
+  <div class="cards">
+    <div class="card">Total Sales<br/><strong>₹{{summary.totalSales}}</strong></div>
+    <div class="card">Total Orders<br/><strong>{{summary.totalOrders}}</strong></div>
+    <div class="card">Avg Order Value<br/><strong>₹{{summary.avgOrderValue}}</strong></div>
+    <div class="card">Total Customers<br/><strong>{{summary.totalCustomers}}</strong></div>
+  </div>
+
+  <div class="quick-links">
+    <a routerLink="/admin/reports/sales">Sales Report</a> |
+    <a routerLink="/admin/reports/products">Product Report</a> |
+    <a routerLink="/admin/reports/customers">Customer Report</a>
+  </div>
+</div>

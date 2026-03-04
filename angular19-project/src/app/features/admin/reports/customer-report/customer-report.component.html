@@ -1,0 +1,14 @@
+<div class="customer-report">
+  <h3>Customer Analysis</h3>
+  <table>
+    <thead><tr><th>Name</th><th>Contact</th><th>Total Orders</th><th>Total Spent</th></tr></thead>
+    <tbody>
+      <tr *ngFor="let c of customers">
+        <td>{{c.name}}</td>
+        <td>{{c.contact}}</td>
+        <td>{{c.totalOrders}}</td>
+        <td>₹{{c.totalSpent}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,16 @@
+<div class="addons">
+  <div *ngFor="let a of addons" class="addon">
+    <label>
+      <input type="checkbox" [checked]="a.selectedPercentage" (change)="toggle(a,$any($event.target).checked)" />
+      {{a.name}} (+{{a.extraPercent}}%)
+    </label>
+    <div *ngIf="a.selectedPercentage">
+      <label>Percent:</label>
+      <select [value]="a.selectedPercentage" (change)="setPercent(a,+$any($event.target).value)">
+        <option value="10">10%</option>
+        <option value="20">20%</option>
+        <option value="50">50%</option>
+      </select>
+    </div>
+  </div>
+</div>

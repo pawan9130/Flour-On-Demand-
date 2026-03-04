@@ -1,0 +1,6 @@
+.dashboard .stats{display:flex;gap:12px;margin-bottom:12px}
+.dashboard .stats .card{flex:1;padding:12px;text-align:center}
+.charts{display:grid;grid-template-columns:2fr 1fr;gap:12px}
+.charts .small{max-width:300px}
+.recent{margin-top:12px;padding:12px}
+@media(max-width:900px){.charts{grid-template-columns:1fr}.dashboard .stats{flex-direction:column}}

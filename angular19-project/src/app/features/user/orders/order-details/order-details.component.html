@@ -1,0 +1,19 @@
+<div class="order-details">
+  <h3>Order #{{order?.orderId}}</h3>
+  <div class="header">{{order?.shopName}} • {{order?.date | date}}</div>
+
+  <div class="timeline">
+    <div *ngFor="let t of timeline" class="step" [class.active]="t.time">
+      <div class="step-name">{{t.step}}</div>
+      <div class="step-time">{{t.time || 'pending'}}</div>
+    </div>
+  </div>
+
+  <div class="items">
+    <h4>Items</h4>
+    <div *ngFor="let it of order?.items">
+      {{it.name}} x {{it.qty}} — ₹{{it.price}}
+    </div>
+    <div class="total">Total: ₹{{order?.total}}</div>
+  </div>
+</div>

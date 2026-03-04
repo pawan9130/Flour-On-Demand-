@@ -1,0 +1,12 @@
+<div *ngIf="order" class="super-order-details">
+  <h3>Order {{order.id}}</h3>
+  <div>Placed: {{order.placedAt | date:'short'}}</div>
+  <div>Customer: {{order.customerName}}</div>
+  <div>Shop: {{order.shopName}}</div>
+  <div>Items: {{order.itemsSummary}}</div>
+  <div>Amount: ₹{{order.amount}}</div>
+  <div>Status: {{order.status}}</div>
+  <div class="actions">
+    <button (click)="promptAndOverride()">Force status</button>
+  </div>
+</div>

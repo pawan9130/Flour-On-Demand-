@@ -1,0 +1,19 @@
+<aside class="user-sidebar" [class.collapsed]="collapsed">
+  <div class="sidebar-top">
+    <button class="collapse-btn" (click)="toggle()" aria-label="Toggle sidebar">
+      <span class="chev" [class.rotated]="collapsed">›</span>
+    </button>
+    <div class="brand" *ngIf="!collapsed">MyFlour</div>
+  </div>
+  <nav>
+    <ul>
+      <li><a routerLink="/user/dashboard">🏠 <span class="label">Dashboard</span></a></li>
+      <li><a routerLink="/user/browse">🛒 <span class="label">Browse Shops</span></a></li>
+      <li><a routerLink="/user/orders">📦 <span class="label">My Orders</span></a></li>
+      <li><a routerLink="/user/profile">⚙️ <span class="label">Profile Settings</span></a></li>
+      <li><a routerLink="/user/addresses">📍 <span class="label">Saved Addresses</span></a></li>
+      <li><a routerLink="/user/reviews">⭐ <span class="label">My Reviews</span></a></li>
+      <li><a routerLink="/user/help">❓ <span class="label">Help & Support</span></a></li>
+    </ul>
+  </nav>
+</aside>

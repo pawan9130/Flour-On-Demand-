@@ -1,0 +1,10 @@
+<div class="admin-orders container">
+  <h3>Orders</h3>
+  <div *ngIf="loading">
+    <div class="skeleton" style="height:80px;margin-bottom:8px"></div>
+  </div>
+  <div *ngFor="let o of orders" class="card order-row" (click)="open(o)">
+    <div>#{{o.orderId}} • {{o.shopName}}</div>
+    <div>₹{{o.total}} • {{o.status}}</div>
+  </div>
+</div>

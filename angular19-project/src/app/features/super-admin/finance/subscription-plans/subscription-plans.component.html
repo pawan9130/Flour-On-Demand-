@@ -1,0 +1,17 @@
+<div class="plans">
+  <h3>Subscription Plans</h3>
+  <div *ngFor="let p of plans" class="plan">
+    <strong>{{ p.name }}</strong> — ₹{{ p.price }}
+    <button (click)="edit(p)">Edit</button>
+  </div>
+  <div *ngIf="editing" class="editor">
+    <h4>Edit Plan</h4>
+    <label>Name <input [(ngModel)]="editing.name" /></label>
+    <label>Price <input type="number" [(ngModel)]="editing.price" /></label>
+    <button (click)="save()">Save</button>
+    <button (click)="editing=null">Cancel</button>
+  </div>
+  <div>
+    <button (click)="add()">Add Plan</button>
+  </div>
+</div>

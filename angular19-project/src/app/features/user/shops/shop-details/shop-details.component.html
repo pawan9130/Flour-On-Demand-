@@ -1,0 +1,22 @@
+<div class="shop-details">
+  <div class="header">
+    <div class="cover">📷 Cover</div>
+    <div class="meta">
+      <h2>{{shop?.name}}</h2>
+      <div>{{shop?.address}}</div>
+      <div>⭐ {{shop?.rating}} • {{shop?.reviews}} reviews • <span [class.open]="shop?.isOpen">{{shop?.isOpen ? 'Open' : 'Closed'}}</span></div>
+    </div>
+  </div>
+
+  <nav class="tabs">
+    <button (click)="setTab('grind')">CUSTOM GRINDING</button>
+    <button (click)="setTab('ready')">READYMADE FLOUR</button>
+    <button (click)="setTab('bulk')">BULK ORDER</button>
+  </nav>
+
+  <section class="products">
+    <div class="grid">
+      <app-product-card *ngFor="let p of products" [product]="p"></app-product-card>
+    </div>
+  </section>
+</div>

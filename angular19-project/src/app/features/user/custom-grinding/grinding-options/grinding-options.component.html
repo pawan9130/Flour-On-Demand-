@@ -1,0 +1,5 @@
+<div class="grind-options">
+  <div *ngFor="let o of options" class="option">
+    <button (click)="choose(o.key)" [class.active]="selected===o.key">{{o.label}}</button>
+  </div>
+</div>

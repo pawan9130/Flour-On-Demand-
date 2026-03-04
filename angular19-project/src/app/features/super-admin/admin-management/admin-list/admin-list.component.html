@@ -1,0 +1,82 @@
+<div class="sa-admin-list">
+  <nav class="sa-nav">
+    <div class="left">
+      <h3>Admin Management</h3>
+      <div class="filters-quick">
+        <button [class.active]="statusFilter==='ALL'" (click)="setStatus('ALL')">All</button>
+        <button [class.active]="statusFilter==='ACTIVE'" (click)="setStatus('ACTIVE')">Active</button>
+        <button [class.active]="statusFilter==='PENDING'" (click)="setStatus('PENDING')">Pending</button>
+        <button [class.active]="statusFilter==='SUSPENDED'" (click)="setStatus('SUSPENDED')">Suspended</button>
+      </div>
+    </div>
+    <div class="center">
+      <input class="search" placeholder="Search admins by name or email" [(ngModel)]="q" (input)="onSearchInput($event)" />
+    </div>
+    <div class="right">
+      <button class="add" (click)="view('add')">Add New Admin</button>
+      <div class="view-toggle">
+        <button [class.active]="viewMode==='grid'" (click)="setView('grid')">Grid</button>
+        <button [class.active]="viewMode==='list'" (click)="setView('list')">List</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="content">
+    <div class="grid" *ngIf="viewMode==='grid'">
+      <div *ngIf="admins.length===0" class="empty">No admin found.</div>
+      <div class="cards">
+        <div class="card" *ngFor="let a of admins">
+          <div class="card-head">
+            <img [src]="'https://i.pravatar.cc/64?u=' + a.email" alt="avatar" />
+            <div class="info">
+              <div class="name">{{a.name}}</div>
+              <div class="shop">{{a.shopName}}</div>
+              <div class="meta">{{a.email}}</div>
+            </div>
+            <div class="status">{{a.status}}</div>
+          </div>
+          <div class="card-body">
+            <div>Orders: {{a.totalOrders || 0}}</div>
+            <div>Revenue: ₹{{a.totalRevenue || 0}}</div>
+          </div>
+          <div class="card-actions">
+            <button (click)="view(a.id)">View</button>
+            <button (click)="approve(a)">Approve</button>
+            <button (click)="suspend(a)">Suspend</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="list-view" *ngIf="viewMode==='list'">
+      <div *ngIf="admins.length===0" class="empty">No admin found.</div>
+      <div class="list-controls">
+        <button (click)="load()">Refresh</button>
+        <div class="summary">Total: {{total}}</div>
+      </div>
+      <table class="admin-table">
+        <thead>
+          <tr><th>ID</th><th>Name</th><th>Email</th><th>Shop</th><th>Status</th><th>Verified</th><th>Orders</th><th>Revenue</th><th>Actions</th></tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let a of admins">
+            <td>{{a.id}}</td>
+            <td>{{a.name}}</td>
+            <td>{{a.email}}</td>
+            <td>{{a.shopName}}</td>
+            <td><span class="badge status-{{a.status?.toLowerCase()}}">{{a.status}}</span></td>
+            <td>{{a.verified ? 'Yes' : 'No'}}</td>
+            <td>{{a.totalOrders || 0}}</td>
+            <td>₹{{a.totalRevenue || 0}}</td>
+            <td>
+              <button routerLink="/super-admin/admins/{{a.id}}">View</button>
+              <button (click)="approve(a)">Approve</button>
+              <button (click)="suspend(a)">Suspend</button>
+              <button (click)="remove(a)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

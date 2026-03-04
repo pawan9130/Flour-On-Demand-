@@ -1,0 +1,32 @@
+<div class="orders-container">
+  <div class="orders-header">
+    <h1>Choose Your Service</h1>
+    <p>Select a service to continue</p>
+  </div>
+
+  <div class="tabs-grid">
+    <div class="tab-card" (click)="navigateToTab('/user/flour-order')">
+      <div class="tab-icon">🌾</div>
+      <h3>Flour Order</h3>
+      <p>Place a fresh flour order</p>
+    </div>
+
+     <div class="tab-card" (click)="navigateToTab('/user/custom-flour-order')">
+      <div class="tab-icon">🌾🔧</div>
+      <h3>Custom Flour Order</h3>
+      <p>Place a fresh flour order</p>
+    </div>
+
+    <div class="tab-card" (click)="navigateToTab('/millet-grinding')">
+      <div class="tab-icon">🔧</div>
+      <h3>Millet Grinding</h3>
+      <p>Custom grinding services</p>
+    </div>
+
+    <div class="tab-card" (click)="navigateToTab('/bulk-order')">
+      <div class="tab-icon">📦</div>
+      <h3>Bulk Orders</h3>
+      <p>Order in bulk for businesses</p>
+    </div>
+  </div>
+</div>

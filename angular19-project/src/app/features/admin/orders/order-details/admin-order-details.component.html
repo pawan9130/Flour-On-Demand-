@@ -1,0 +1,45 @@
+<div class="admin-order-details" *ngIf="order">
+  <div class="header">
+    <div>
+      <h3>Order #{{order.orderId || order.id}}</h3>
+      <div class="muted">Placed: {{order._createdAtFormatted || order.createdAt || order.date}}</div>
+      <div class="muted">Last updated: {{order._updatedAtFormatted || order.updatedAt}}</div>
+    </div>
+    <div>
+      <div>Status: <strong class="status-{{order.status}}">{{order.status}}</strong></div>
+      <app-update-status (updated)="onStatusUpdated($event)"></app-update-status>
+    </div>
+  </div>
+
+  <div class="shop-user">
+    <div><strong>Shop:</strong> {{order.admin?.shopName || order.shopName}}</div>
+    <div><strong>User:</strong> {{order.user?.name || order.user?.firstName || order.user?.email}}</div>
+    <div><strong>Mobile:</strong> {{order.user?.phone || 'N/A'}}</div>
+    <div><strong>Delivery Address:</strong>
+      <div *ngIf="order.user?.addresses?.length; else addr2">{{order.user.addresses[0].line1}}, {{order.user.addresses[0].city}} - {{order.user.addresses[0].pincode}}</div>
+      <ng-template #addr2>{{order.user?.address?.streetAddress || 'No address provided'}}</ng-template>
+    </div>
+  </div>
+
+  <div class="items">
+    <h4>Selected Products</h4>
+    <table class="items-table">
+      <thead><tr><th>Product</th><th>Qty (kg)</th><th>Price/kg</th><th>Subtotal</th></tr></thead>
+      <tbody>
+        <tr *ngFor="let it of order.items">
+          <td>{{it.product || it.name}}</td>
+          <td>{{it.quantityKg || it.qty}}</td>
+          <td>₹{{it.pricePerKg || it.price}}</td>
+          <td>₹{{((it.pricePerKg || it.price) * (it.quantityKg || it.qty)) | number:'1.2-2'}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="total">Total: <strong>₹{{order.total}}</strong></div>
+  </div>
+
+  <div class="actions">
+    <button (click)="accept()" [disabled]="order.status==='accepted' || order.status==='cancelled'">Accept order</button>
+    <button (click)="cancel()" [disabled]="order.status==='cancelled'">Cancel order</button>
+    <button (click)="printInvoice()">Print Invoice</button>
+  </div>
+</div>

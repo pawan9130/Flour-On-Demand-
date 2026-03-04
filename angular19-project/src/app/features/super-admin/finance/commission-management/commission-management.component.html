@@ -1,0 +1,23 @@
+<div class="commission">
+  <h3>Commission Settings</h3>
+  <div *ngIf="settings">
+    <div class="summary">
+      <div>Platform %: <input type="number" [(ngModel)]="settings.platformPercent"/>%</div>
+      <div>Minimum fee: <input type="number" [(ngModel)]="settings.minimumFee"/></div>
+    </div>
+    <div class="slabs">
+      <h4>Slabs</h4>
+      <div *ngFor="let s of settings.slabs; let i = index" class="slab">
+        <input type="number" [(ngModel)]="s.from"/> - <input type="text" [(ngModel)]="s.to"/> : <input type="number" [(ngModel)]="s.rate"/>%
+        <button (click)="settings.slabs.splice(i,1)">Remove</button>
+      </div>
+      <button (click)="settings.slabs.push({ from:0, to:Infinity, rate:0 })">Add Slab</button>
+    </div>
+    <div>
+      <h4>Shop Exceptions</h4>
+      <div *ngIf="settings.exceptions?.length===0">No exceptions</div>
+      <div *ngFor="let ex of settings.exceptions || []">{{ ex.shop }} — {{ ex.rate }}%</div>
+    </div>
+    <div class="actions"><button (click)="save()">Save</button></div>
+  </div>
+</div>

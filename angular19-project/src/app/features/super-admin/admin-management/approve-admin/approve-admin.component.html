@@ -1,0 +1,8 @@
+<div class="approve-admin">
+  <h4>Approval</h4>
+  <div *ngIf="adminId">Admin: {{adminId}}</div>
+  <div class="actions">
+    <button (click)="approve()">Approve</button>
+    <button (click)="reject()">Reject</button>
+  </div>
+</div>

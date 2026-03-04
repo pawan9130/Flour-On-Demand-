@@ -1,0 +1,14 @@
+<div class="product-report">
+  <h3>Product Performance</h3>
+  <table>
+    <thead><tr><th>Product</th><th>Units Sold</th><th>Revenue</th><th>Rating</th></tr></thead>
+    <tbody>
+      <tr *ngFor="let p of products">
+        <td>{{p.name}}</td>
+        <td>{{p.unitsSold}}</td>
+        <td>₹{{p.revenue}}</td>
+        <td>{{p.rating}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

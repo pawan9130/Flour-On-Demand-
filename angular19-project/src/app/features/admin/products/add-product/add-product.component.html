@@ -1,0 +1,26 @@
+<div class="add-product">
+  <h3>Add Product Here</h3>
+
+  <div class="tabs">
+    <button (click)="tab='custom'">Custom Grinding</button> 
+    <button (click)="tab='readymade'">Readymade</button>
+    <button (click)="tab='bulk'">Bulk Order</button>
+  </div>
+ 
+  <div class="field">Enter product name <input [(ngModel)]="name" type="text" /></div>
+  <div class="field">Enter price <input [(ngModel)]="price" type="number"  /></div>
+  <div class="field">Enter stock <input [(ngModel)]="stock" type="number"  /></div>
+  <div class="field"> Enter category <input [(ngModel)]="category" type="text" />  </div>
+  <div class="field"> Enter slug <input [(ngModel)]="slug" type="text" />  </div>
+  <div class="field"> Enter description <input [(ngModel)]="description" type="text" />  </div>
+  <div class="field"> upload image <input [(ngModel)]="images" type="text" />  </div>
+  
+  <div class="field"><button (click)="save()">Save</button></div>
+
+
+  <div class="form-area">
+    <app-custom-grinding-form *ngIf="tab==='custom'" (saved)="saved()"></app-custom-grinding-form>
+    <app-readymade-flour-form *ngIf="tab==='readymade'" (saved)="saved()"></app-readymade-flour-form>
+    <app-bulk-order-form *ngIf="tab==='bulk'" (saved)="saved()"></app-bulk-order-form>
+  </div>
+</div>

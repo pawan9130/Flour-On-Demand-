@@ -1,0 +1,4 @@
+.order-details .timeline{display:flex;flex-direction:column;gap:6px;margin:12px 0}
+.order-details .step{padding:8px;background:#fafafa;border-radius:6px}
+.order-details .step.active{border-left:4px solid #3b82f6}
+.items{background:#fff;padding:12px;border-radius:6px}

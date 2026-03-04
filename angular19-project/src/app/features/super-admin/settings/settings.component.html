@@ -1,0 +1,7 @@
+<div class="sa-settings">
+  <h2>System Settings</h2>
+  <nav class="tabs">
+    <a *ngFor="let t of tabs" [routerLink]="['/super-admin','settings', t.path]">{{ t.label }}</a>
+  </nav>
+  <router-outlet></router-outlet>
+</div>

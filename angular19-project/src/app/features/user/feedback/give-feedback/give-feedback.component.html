@@ -1,0 +1,6 @@
+<div class="give-feedback container">
+  <h3>Give Feedback</h3>
+  <label>Rating: <input type="number" min="1" max="5" [(ngModel)]="model.rating" /></label>
+  <label>Review: <textarea [(ngModel)]="model.text"></textarea></label>
+  <div><button (click)="submit()">Submit</button></div>
+</div>

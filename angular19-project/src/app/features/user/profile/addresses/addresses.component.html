@@ -1,0 +1,8 @@
+<div class="addresses container">
+  <h3>Addresses</h3>
+  <div *ngFor="let a of addresses" class="card">
+    <div><b>{{a.name}}</b></div>
+    <div>{{a.line1}} {{a.city}}</div>
+    <div><button (click)="setDefault(a)">Set Default</button></div>
+  </div>
+</div>

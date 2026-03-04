@@ -1,0 +1,22 @@
+<div class="toolbar">
+  <input [(ngModel)]="q" placeholder="Search orders..." />
+  <button (click)="load()">Search</button>
+  <button (click)="bulkAction('export')">Export Selected</button>
+  <button (click)="bulkAction('cancel')">Cancel Selected</button>
+  <label><input type="checkbox" [(ngModel)]="realtime" (change)="toggleRealtime()"/> Real-time</label>
+</div>
+
+<div class="orders-table">
+  <div *ngFor="let o of orders" class="order-row" [ngClass]="o.status.toLowerCase()">
+    <div class="sel"><input type="checkbox" (change)="toggleSelect(o)"/></div>
+    <div class="summary">
+      <div class="id"><a [routerLink]="['/super-admin','orders', o.id]">{{ o.id }}</a></div>
+      <div class="when">{{ o.placedAt | date:'short' }}</div>
+      <div class="cust">{{ o.customerName }} • <small>{{ o.shopName }}</small></div>
+    </div>
+    <div class="meta">{{ o.itemsSummary }} • ₹{{ o.amount }}</div>
+    <div class="status">{{ o.status }}</div>
+    <div class="actions"><button (click)="overrideStatus(o)">Override</button></div>
+  </div>
+</div>
+

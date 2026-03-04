@@ -1,0 +1,7 @@
+<div class="payment-gateway">
+  <h3>Payment Gateway</h3>
+  <label>Razorpay enabled: <input type="checkbox" [(ngModel)]="payment.gateways?.razorpay?.enabled" /></label>
+  <label>Stripe enabled: <input type="checkbox" [(ngModel)]="payment.gateways?.stripe?.enabled" /></label>
+  <label>Test mode: <input type="checkbox" [(ngModel)]="payment.testMode" /></label>
+  <div style="margin-top:8px"><button (click)="save()">Save</button></div>
+</div>

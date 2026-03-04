@@ -1,0 +1,46 @@
+<div class="admin-products">
+    <div class="top">
+      <button (click)="back()">← Back to Sellers</button>
+      <h2>{{adminName}}</h2>
+    </div>
+
+    <div class="filters-row">
+      <div class="tabs">
+        <button class="active" disabled="true">All Products</button>
+        <button disabled="true"> Popular</button>
+        <button disabled="true" >New</button>
+      </div>
+      <div class="search">
+        <input placeholder="Search products" (input)="onSearch($event)" />
+      </div>
+    </div>
+
+    <div class="products-grid">
+      <div *ngFor="let p of products" class="product-card">
+        <div class="product-image" [style.background-image]="'url('+ (p.images?.[0]||'/assets/placeholder.png') +')'"></div>
+        <div class="pcontent">
+          <div class="phead">
+            <div>
+              <div class="pname">{{p.name}}</div>
+              <div class="plocal">{{p.localName || ''}}</div>
+            </div>
+            <div class="price">₹{{p.price}}/kg</div>
+          </div>
+          <div class="pmeta">Stock: <strong>{{p.stock || 0}} kg</strong> • Ready in {{p.readyIn || '30 mins'}}</div>
+          <div class="badges">
+            <span *ngIf="p.bestseller" class="badge">🔥 Bestseller</span>
+            <span *ngIf="p.organic" class="badge">🌿 Organic</span>
+          </div>
+
+          <div class="actions">
+            <div class="quantity-selector">
+              <button (click)="changeQty(p,-0.5)">−</button>
+              <input type="number" step="0.5" [(ngModel)]="p._qty" />
+              <button (click)="changeQty(p,0.5)">+</button>
+            </div>
+            <button class="order-btn" (click)="addToCart(p)">ORDER NOW</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

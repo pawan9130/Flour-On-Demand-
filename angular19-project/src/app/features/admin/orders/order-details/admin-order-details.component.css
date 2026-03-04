@@ -1,0 +1,21 @@
+.admin-order-details{max-width:980px;margin:20px auto;padding:20px;background:#fff;border-radius:8px;box-shadow:0 6px 18px rgba(10,20,40,0.06);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial}
+.header{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;border-bottom:1px solid #f1f3f5;padding-bottom:12px;margin-bottom:14px}
+.muted{color:#68707a;font-size:0.95rem}
+.shop-user{display:flex;gap:18px;background:#fbfdff;padding:12px;border-radius:6px;margin-bottom:14px;color:#263238}
+.items{margin-top:12px}
+.items-table{width:100%;border-collapse:collapse}
+.items-table th,.items-table td{padding:10px 12px;border-bottom:1px solid #f1f1f1;text-align:left}
+.items-table thead th{background:#fafafa;color:#23303b;font-weight:600}
+.total{text-align:right;margin-top:10px;font-size:1.05rem}
+.actions{display:flex;gap:10px;margin-top:16px}
+.actions button{padding:8px 12px;border-radius:6px;border:1px solid transparent;cursor:pointer}
+.actions button:first-child{background:#0b63d6;color:#fff;border-color:#095ab8}
+.actions button:nth-child(2){background:#fff;color:#a00;border:1px solid #f3c0c0}
+.actions button:nth-child(3){background:#f3f4f6;color:#333;border:1px solid #ddd}
+.actions button:disabled{opacity:0.6;cursor:not-allowed}
+@media (max-width:700px){.header{flex-direction:column}.shop-user{flex-direction:column}}
+
+/* status styles */
+.status-pending{background:#fff4e5;color:#a65a00;padding:4px 8px;border-radius:6px}
+.status-accepted{background:#e6ffef;color:#0b7a3a;padding:4px 8px;border-radius:6px}
+.status-cancelled{background:#ffecec;color:#a00;padding:4px 8px;border-radius:6px}

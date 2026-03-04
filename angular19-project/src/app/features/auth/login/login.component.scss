@@ -1,0 +1,8 @@
+mat-card.card{ border-radius:12px; padding:20px; }
+
+@media (max-width:599px){
+  mat-card.card{ width:92%; padding:16px; }
+}
+
+.btn-gradient{ display:inline-flex; align-items:center; gap:8px }
+

@@ -1,0 +1,16 @@
+<header class="app-bar">
+  <div class="brand">DeliveryApp</div>
+  <div class="spacer"></div>
+  <div class="user" *ngIf="(user$ | async) as user; else guest">
+    <span class="name">Hi, {{ $any(user).name || $any(user).firstName || $any(user).displayName || $any(user).email }}</span>
+      <img class="avatar" [src]="$any(user).profileImageUrl || $any(user).avatarUrl || ('https://i.pravatar.cc/48?u=' + ($any(user).email || $any(user).id))" (error)="onAppAvatarError($event)" [attr.data-email]="$any(user).email" alt="profile" />
+
+     <button class="btn-plain" (click)="logout()" title="Logout" style="margin-left:8px">Logout</button>
+  </div>
+  <ng-template #guest>
+    <div class="user"> <span class="name">Hi, Guest</span> </div>
+  </ng-template>
+</header>
+<main class="app-content">
+  <router-outlet></router-outlet>
+</main>

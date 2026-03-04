@@ -1,0 +1,21 @@
+<header class="user-header app-header">
+  <div class="left">
+    <button class="menu-btn" aria-label="Toggle menu">☰</button>
+    <div class="brand">Flour On Demand</div>
+  </div>
+
+  <div class="center">
+    <input [(ngModel)]="query" placeholder="Search shops or products" (keyup.enter)="onSearch()" />
+  </div>
+
+  <div class="right">
+    <button class="icon" (click)="goToCart()">🛒 <span class="badge" *ngIf="cartCount">{{cartCount}}</span></button>
+    <button class="icon">🔔 <span class="badge" *ngIf="notifications">{{notifications}}</span></button>
+    <div class="profile">
+      <img class="avatar" *ngIf="currentUser" [src]="currentUser.profileImageUrl || currentUser.avatarUrl || ('https://i.pravatar.cc/48?u=' + (currentUser.email || currentUser.id))" (error)="onAvatarError($event)" [attr.data-email]="$any(currentUser).email" alt="avatar">
+      <span *ngIf="currentUser">Hi, {{currentUser.name || currentUser.displayName || currentUser.email}} ({{currentUser.role || currentUser.roleName}})</span>
+      <span *ngIf="!currentUser">Hi, Guest</span>
+    </div>
+    <button class="btn-plain" (click)="logout()" title="Logout" style="margin-left:8px">Logout</button>
+  </div>
+</header>

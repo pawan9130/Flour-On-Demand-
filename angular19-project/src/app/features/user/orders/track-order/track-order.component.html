@@ -1,0 +1,8 @@
+<div class="track">
+  <h3>Tracking Order #{{orderId}}</h3>
+  <div class="status">Current: {{status}}</div>
+  <div class="progress">
+    <div *ngFor="let t of timeline" class="step" [class.done]="t.time">{{t.step}}</div>
+  </div>
+  <div class="map">Map placeholder</div>
+</div>

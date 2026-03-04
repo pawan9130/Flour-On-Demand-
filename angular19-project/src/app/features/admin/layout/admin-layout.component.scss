@@ -1,0 +1,8 @@
+.admin-layout{height:100vh;display:flex;flex-direction:column}
+.admin-layout .body{display:flex;flex:1;min-height:0}
+.admin-layout app-admin-sidebar{flex:0 0 220px}
+.admin-layout .content{flex:1;overflow:auto;padding:20px;box-sizing:border-box}
+@media (max-width:800px){
+  .admin-layout app-admin-sidebar{display:none}
+  .admin-layout .body{flex-direction:column}
+}

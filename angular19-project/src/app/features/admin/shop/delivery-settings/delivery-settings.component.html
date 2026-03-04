@@ -1,0 +1,27 @@
+<div class="delivery-settings">
+  <h3>Delivery Options</h3>
+  <form [formGroup]="form">
+    <label><input type="checkbox" formControlName="shopPickup" /> Shop pickup available</label>
+    <label><input type="checkbox" formControlName="homeDelivery" /> Home delivery available</label>
+    <label>Delivery radius (km) <input type="number" formControlName="deliveryRadiusKm" /></label>
+    <label>Free delivery above amount <input type="number" formControlName="freeAboveAmount" /></label>
+
+    <h4>Charges</h4>
+    <label>Per km charge <input type="number" formControlName="perKmCharge" /></label>
+    <label>Fixed delivery fee <input type="number" formControlName="fixedFee" /></label>
+
+    <h4>Slots</h4>
+    <label><input type="checkbox" formControlName="slotBookingEnabled" /> Enable slot booking</label>
+    <label>Slot duration (minutes) <input type="number" formControlName="slotDurationMinutes" /></label>
+    <label>Max orders per slot <input type="number" formControlName="maxOrdersPerSlot" /></label>
+
+    <h4>Order Settings</h4>
+    <label>Minimum order value <input type="number" formControlName="minOrderValue" /></label>
+    <label>Maximum order value <input type="number" formControlName="maxOrderValue" /></label>
+    <label>Preparation time (minutes) <input type="number" formControlName="preparationTimeMinutes" /></label>
+    <label><input type="checkbox" formControlName="autoAccept" /> Order acceptance auto/review</label>
+    <label>Cut-off time for same day (minutes) <input type="number" formControlName="cutOffTimeMinutes" /></label>
+
+    <div class="actions"><button type="button" (click)="save()">Save Delivery Settings</button></div>
+  </form>
+</div>

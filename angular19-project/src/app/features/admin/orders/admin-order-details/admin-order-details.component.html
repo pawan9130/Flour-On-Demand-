@@ -1,0 +1,50 @@
+<div class="admin-order container card" *ngIf="order">
+  <div class="header">
+    <div>
+      <h3>Order #{{order.id || order.orderId}}</h3>
+      <div class="muted">Placed: {{order._createdAtFormatted || order.createdAt}}</div>
+    </div>
+    <div class="status-block">
+      <label>Status</label>
+      <select [(ngModel)]="order.status">
+        <option value="pending">Pending</option>
+        <option value="confirmed">Confirmed</option>
+        <option value="shipped">Shipped</option>
+        <option value="delivered">Delivered</option>
+        <option value="cancelled">Cancelled</option>
+      </select>
+      <button (click)="updateStatus(order.status)">Update</button>
+    </div>
+  </div>
+
+  <div class="shop-user">
+    <div class="shop">Shop: <strong>{{order.admin?.shopName || order.admin?.name || order.shopName}}</strong></div>
+    <div class="user">User: <strong>{{order.user?.name || order.user?.firstName || order.user?.email}}</strong></div>
+    <div class="phone">Mobile: <strong>{{order.user?.phone || (order.user?.contacts?.[0]) || 'N/A'}}</strong></div>
+    <div class="address">Delivery Address:<br/>
+      <div *ngIf="order.user?.addresses?.length; else noaddr">{{order.user.addresses[0].line1}}, {{order.user.addresses[0].city}} - {{order.user.addresses[0].pincode}}</div>
+      <ng-template #noaddr><div>{{order.user?.address?.streetAddress || 'No address provided'}}</div></ng-template>
+    </div>
+  </div>
+
+  <div class="items card">
+    <h4>Selected Products</h4>
+    <table style="width:100%">
+      <thead><tr><th>Product</th><th>Qty (kg)</th><th>Price/kg</th><th>Subtotal</th></tr></thead>
+      <tbody>
+        <tr *ngFor="let it of order.items">
+          <td>{{it.product || it.name}}</td>
+          <td>{{it.quantityKg || it.qty}}</td>
+          <td>₹{{it.pricePerKg || it.price}}</td>
+          <td>₹{{((it.pricePerKg || it.price) * (it.quantityKg || it.qty)) | number:'1.2-2'}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="total">Total: <strong>₹{{order.total}}</strong></div>
+  </div>
+
+  <div class="timeline">
+    <div>Order created at: {{order.createdAt}}</div>
+    <div *ngIf="order.updatedAt">Last updated: {{order.updatedAt}}</div>
+  </div>
+</div>

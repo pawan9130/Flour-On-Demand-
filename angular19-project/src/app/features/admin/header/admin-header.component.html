@@ -1,0 +1,10 @@
+<header class="admin-header app-header">
+  <div class="left">Admin Dashboard • Shop: Demo Shop <button>Toggle Open</button></div>
+  <div class="right">
+    <img class="avatar" *ngIf="currentUser" [src]="currentUser.profileImageUrl || currentUser.avatarUrl || ('https://i.pravatar.cc/48?u=' + (currentUser.email || currentUser.id))" (error)="onAvatarError($event)" [attr.data-email]="$any(currentUser).email" alt="avatar">
+    <span *ngIf="currentUser">{{currentUser.name || currentUser.displayName || currentUser.email}} ({{currentUser.role || currentUser.roleName}})</span>
+    <span *ngIf="!currentUser">Profile ▾</span>
+    • 🔔 <span class="badge">3</span>
+    <button class="btn-plain" (click)="logout()" style="margin-left:8px">Logout</button>
+  </div>
+</header>

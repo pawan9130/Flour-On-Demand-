@@ -1,0 +1,48 @@
+<div class="admin-products container">
+  <div class="toolbar"><button (click)="addNew()">Add Product</button></div>
+  <div class="grid">
+    <div *ngFor="let p of products" class="card product">
+      <h4>{{p.name}}</h4>
+      <div>₹{{p.price}}</div>
+      <div>Stock: {{p.stock}}</div>
+      <div><button (click)="edit(p.id)">Edit</button></div>
+    </div>
+  </div>
+</div>
+<div class="product-list">
+  <div class="header">
+    <h3>Products</h3>
+    <div class="actions">
+      <input placeholder="Search" [(ngModel)]="q" />
+      <button (click)="addNew()">Add New Product</button>
+    </div>
+  </div>
+
+  <div class="tabs">
+    <button (click)="category='all'; load()">All</button>
+    <button (click)="category='custom'; load()">Custom Grinding</button>
+    <button (click)="category='readymade'; load()">Readymade</button>
+    <button (click)="category='bulk'; load()">Bulk</button>
+  </div>
+
+  <table class="products-table">
+    <thead>
+      <tr><th>Image</th><th>Name</th><th>Category</th><th>Price</th><th>Stock</th><th>Status</th><th>Actions</th></tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let p of products">
+        <td>🖼️</td>
+        <td>{{p.name}}</td>
+        <td>{{p.category}}</td>
+        <td>₹{{p.price}}</td>
+        <td>{{p.stock}}</td>
+        <td>{{p.status}}</td>
+        <td>
+          <button (click)="edit(p.id)">Edit</button>
+          <button (click)="remove(p.id)">Delete</button>
+          <button (click)="toggleStatus(p.id)">Toggle Status</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,3 @@
+.user-list .filters{display:flex;gap:8px;align-items:center;margin-bottom:8px}
+.user-list table{width:100%;border-collapse:collapse}
+.user-list th,.user-list td{padding:6px;border:1px solid #eee}

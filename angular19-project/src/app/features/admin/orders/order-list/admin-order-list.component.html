@@ -1,0 +1,54 @@
+<div class="admin-orders">
+  <h3>Orders</h3>
+
+  <app-order-filters (filter)="applyFilter($event)"></app-order-filters>
+
+  <div class="bulk-actions">
+    <label><input type="checkbox" (change)="selectAll($any($event.target).checked)" /> Select all</label>
+    <button (click)="bulkUpdateStatus('processing')" [disabled]="selected.size===0">Mark Processing</button>
+    <button (click)="bulkUpdateStatus('cancelled')" [disabled]="selected.size===0">Cancel Selected</button>
+  </div>
+
+  <table class="orders-table">
+    <thead>
+      <tr>
+        <th></th>
+        <th>Order ID</th>
+        <th>Customer</th>
+        <th>Items</th>
+        <th>Total</th>
+        <th>Status</th>
+        <th>Payment</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let o of orders" [ngClass]="{'order-cancelled': o.status==='cancelled'}">
+        <td><input type="checkbox" (change)="toggleSelect(o.orderId,$any($event.target).checked)" [disabled]="o.status==='cancelled'" /></td>
+        <td><a [routerLink]="['/admin/order', o.orderId]" [class.disabled-link]="o.status==='cancelled'">#{{o.orderId}}</a></td>
+        <td>{{o.customer}}</td>
+        <td>{{o.items.length}}</td>
+        <td>₹{{o.total}}</td>
+        <td><span class="badge status-{{o.status}}">{{o.status}}</span></td>
+        <td>{{o.payment || 'COD'}}</td>
+        <td>
+          <a [routerLink]="['/admin/order', o.orderId]" [class.disabled-link]="o.status==='cancelled'">View</a>
+          <button (click)="contactCustomer(o)" [disabled]="o.status==='cancelled'">Contact</button>
+          <button (click)="printInvoice(o)" [disabled]="o.status==='cancelled'">Print</button>
+          <button class="msg-btn" (click)="toggleMessageBox(o)">Message</button>
+          <div class="message-box" *ngIf="messageOpen.has(o.orderId)">
+            <textarea [(ngModel)]="messageDrafts[o.orderId]" placeholder="Write a brief message to the customer..."></textarea>
+            <div class="msg-actions">
+              <button (click)="sendMessage(o)">Send</button>
+              <button (click)="toggleMessageBox(o)">Close</button>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="load-more">
+    <button (click)="nextPage()" [disabled]="loading">Load more</button>
+  </div>
+</div>

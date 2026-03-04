@@ -1,0 +1,14 @@
+<div class="email-templates">
+  <h3>Email Templates</h3>
+  <div *ngFor="let t of templates" style="border-bottom:1px solid #eee;padding:8px">
+    <b>{{t.name}}</b> — {{t.subject}} <button (click)="edit(t)">Edit</button>
+  </div>
+
+  <div *ngIf="editing" style="margin-top:12px;border:1px solid #ddd;padding:8px">
+    <h4>Edit: {{editing.name}}</h4>
+    <label>Subject: <input [(ngModel)]="editing.subject" /></label>
+    <label>HTML: <textarea rows="6" [(ngModel)]="editing.html"></textarea></label>
+    <label>Active: <input type="checkbox" [(ngModel)]="editing.active" /></label>
+    <div><button (click)="save()">Save</button> <button (click)="test()">Send Test</button></div>
+  </div>
+</div>

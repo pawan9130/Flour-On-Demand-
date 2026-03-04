@@ -1,0 +1,25 @@
+<div class="super-dashboard">
+  <h2>System Overview</h2>
+  <div class="stats-cards">
+    <div class="card">Total Users<br/><strong>{{stats.totalUsers}}</strong></div>
+    <div class="card">Total Admins/Shops<br/><strong>{{stats.totalAdmins}} / {{stats.totalShops}}</strong></div>
+    <div class="card">Total Orders<br/><strong>{{stats.totalOrders}}</strong></div>
+    <div class="card">Total Revenue<br/><strong>₹{{stats.totalRevenue}}</strong></div>
+  </div>
+
+  <div class="widgets">
+    <div class="recent">
+      <h4>Recent Activities</h4>
+      <ul>
+        <li *ngFor="let a of activities">[{{a.type}}] {{a.message}} <small>{{a.ts}}</small></li>
+      </ul>
+    </div>
+
+    <div class="approvals">
+      <h4>Pending Approvals</h4>
+      <ul>
+        <li *ngFor="let p of approvals">{{p.type}} - {{p.name}}</li>
+      </ul>
+    </div>
+  </div>
+</div>

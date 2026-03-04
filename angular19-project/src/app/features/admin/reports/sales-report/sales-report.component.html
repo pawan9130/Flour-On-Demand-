@@ -1,0 +1,16 @@
+<div class="sales-report">
+  <h3>Sales Overview</h3>
+  <div class="chart-placeholder">[Line chart placeholder]</div>
+  <table>
+    <thead><tr><th>Date</th><th>Orders</th><th>Items</th><th>Revenue</th><th>Avg Order</th></tr></thead>
+    <tbody>
+      <tr *ngFor="let s of series">
+        <td>{{s.date}}</td>
+        <td>{{s.orders}}</td>
+        <td>-</td>
+        <td>₹{{s.revenue}}</td>
+        <td>₹{{(s.revenue / Math.max(1,s.orders)).toFixed(0)}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,33 @@
+<div class="shop-list-page">
+  <aside class="filters">
+    <input placeholder="Search shops" [(ngModel)]="query" (ngModelChange)="load()" />
+    <label>Rating</label>
+    <select [(ngModel)]="ratingFilter" (change)="load()">
+      <option value="0">All</option>
+      <option value="4">4★+</option>
+      <option value="3">3★+</option>
+    </select>
+
+    <label>Distance</label>
+    <select [(ngModel)]="distanceFilter" (change)="load()">
+      <option value="0">Any</option>
+      <option value="1">Within 1 km</option>
+      <option value="2">Within 2 km</option>
+      <option value="5">Within 5 km</option>
+    </select>
+
+    <label><input type="checkbox" [(ngModel)]="openNow" (change)="load()" /> Open now</label>
+    <button (click)="clearFilters()">Clear filters</button>
+  </aside>
+
+  <section class="results">
+    <div *ngIf="shops.length === 0" class="empty">
+      <p>No shops found</p>
+      <button (click)="clearFilters()">Clear filters</button>
+    </div>
+
+    <div class="cards">
+      <app-shop-card *ngFor="let s of shops" [shop]="s"></app-shop-card>
+    </div>
+  </section>
+</div>

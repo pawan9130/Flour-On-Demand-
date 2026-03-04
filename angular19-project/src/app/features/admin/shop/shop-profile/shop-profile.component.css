@@ -1,0 +1,37 @@
+.shop-header{display:flex;flex-direction:column;border:1px solid #e5e5e5}
+.cover{position:relative;height:160px;background:#f5f5f5}
+.cover img{width:100%;height:160px;object-fit:cover}
+.cover-placeholder{height:160px;display:flex;align-items:center;justify-content:center;color:#888}
+.cover-actions{position:absolute;right:8px;top:8px}
+.meta{display:flex;gap:16px;padding:12px}
+.logo img{width:80px;height:80px;object-fit:cover;border-radius:8px}
+.logo-placeholder{width:80px;height:80px;background:#eee;display:flex;align-items:center;justify-content:center}
+.profile-form{padding:12px;display:flex;flex-direction:column;gap:12px}
+.profile-form label{display:block}
+.gallery img{width:96px;height:64px;object-fit:cover;margin-right:6px}
+.map-preview iframe{width:100%;height:200px;border:0}
+.actions{padding:12px}
+
+/* Improved professional layout */
+.shop-profile{max-width:1000px;margin:20px auto;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial;color:#223}
+.shop-header{border-radius:10px;overflow:hidden;box-shadow:0 8px 22px rgba(18,30,50,0.06);background:#fff}
+.cover{height:220px}
+.cover img{height:220px}
+.cover-actions input{opacity:0;position:absolute;right:8px;top:8px;width:36px;height:36px}
+.meta{padding:18px;display:flex;align-items:center}
+.logo{margin-right:16px}
+.logo img, .logo-placeholder{width:96px;height:96px;border-radius:12px;box-shadow:0 6px 14px rgba(18,30,50,0.06)}
+.title h2{margin:0;font-size:1.6rem}
+.badges{margin-top:8px;display:flex;gap:8px;align-items:center}
+.verified{background:#e6ffef;color:#0b7a3a;padding:6px 10px;border-radius:999px;font-weight:700;font-size:12px}
+.profile-form{background:#fff;padding:18px;border-radius:10px;margin-top:14px;box-shadow:0 6px 18px rgba(12,20,40,0.03)}
+.profile-form section{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.profile-form label{display:flex;flex-direction:column;font-size:13px;color:#445}
+.profile-form input,.profile-form textarea{padding:8px;border:1px solid #e6edf3;border-radius:8px;background:#fbfdff}
+.profile-form textarea{min-height:90px}
+.profile-form .map-preview iframe{height:200px}
+.gallery{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.gallery img{width:120px;height:80px;border-radius:8px;object-fit:cover}
+.actions{display:flex;justify-content:flex-end;padding:0;margin-top:12px}
+.actions button{background:#0b63d6;color:#fff;padding:10px 14px;border-radius:8px;border:none}
+@media (max-width:900px){.profile-form section{grid-template-columns:1fr}.meta{flex-direction:row;gap:12px}} 

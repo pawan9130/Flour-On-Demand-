@@ -1,0 +1,69 @@
+<div class="shop-profile">
+  <div class="shop-header">
+    <div class="cover">
+      <img *ngIf="coverPreview; else coverPlaceholder" [src]="coverPreview" alt="cover" />
+      <ng-template #coverPlaceholder><div class="cover-placeholder">Cover photo</div></ng-template>
+      <div class="cover-actions">
+        <input type="file" accept="image/*" (change)="$any($event.target).files.length && onFile($any($event.target).files[0], 'cover')" />
+      </div>
+    </div>
+    <div class="meta">
+      <div class="logo">
+        <img *ngIf="logoPreview; else logoPlaceholder" [src]="logoPreview" alt="logo" />
+        <ng-template #logoPlaceholder><div class="logo-placeholder">Logo</div></ng-template>
+        <input type="file" accept="image/*" (change)="$any($event.target).files.length && onFile($any($event.target).files[0], 'logo')" />
+      </div>
+      <div class="title">
+        <h2>{{ v.name }}</h2>
+        <div class="badges">
+          <span *ngIf="v.verified" class="verified">Verified</span>
+          <label><input type="checkbox" [checked]="v.isOpen" (change)="form.patchValue({ isOpen: $any($event.target).checked })" /> Open</label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <form [formGroup]="form" class="profile-form" (ngSubmit)="saveProfile()">
+    <section>
+      <h3>Shop Information</h3>
+      <label>Shop name <input formControlName="name" /></label>
+      <label>Owner name <input formControlName="ownerName" /></label>
+      <label>Contact number <input formControlName="contactNumber" /></label>
+      <label>Alternate number <input formControlName="altNumber" /></label>
+      <label>Email <input formControlName="email" type="email" /></label>
+      <label>GST number <input formControlName="gstNumber" /></label>
+      <label>FSSAI number <input formControlName="fssaiNumber" /></label>
+      <label>Description <textarea formControlName="description"></textarea></label>
+    </section>
+
+    <section>
+      <h3>Address</h3>
+      <div formGroupName="address">
+        <label>Address line 1 <input formControlName="line1" /></label>
+        <label>Address line 2 <input formControlName="line2" /></label>
+        <label>Landmark <input formControlName="landmark" /></label>
+        <label>City <input formControlName="city" /></label>
+        <label>State <input formControlName="state" /></label>
+        <label>Pincode <input formControlName="pincode" /></label>
+        <label>Latitude <input formControlName="latitude" type="number" step="any" /></label>
+        <label>Longitude <input formControlName="longitude" type="number" step="any" /></label>
+        <button type="button" (click)="pickOnMap()">Pick on map</button>
+      </div>
+      <div class="map-preview" *ngIf="v.address?.latitude && v.address?.longitude">
+        <iframe [src]="'https://maps.google.com?q=' + v.address.latitude + ',' + v.address.longitude + '&z=15&output=embed'" frameborder="0"></iframe>
+      </div>
+    </section>
+
+    <section>
+      <h3>Gallery</h3>
+      <input type="file" accept="image/*" multiple (change)="onGalleryFiles($any($event.target).files)" />
+      <div class="gallery">
+        <img *ngFor="let g of gallery" [src]="g" />
+      </div>
+    </section>
+
+    <div class="actions">
+      <button type="submit">Save</button>
+    </div>
+  </form>
+</div>

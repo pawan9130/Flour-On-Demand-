@@ -1,0 +1,13 @@
+.admin-sidebar{width:220px;background:#081226;color:#fff;height:100vh;padding:12px;box-sizing:border-box;transition:width .22s ease}
+.admin-sidebar .brand{display:flex;align-items:center;justify-content:space-between}
+.admin-sidebar .logo{font-weight:700}
+.admin-sidebar .collapse-btn{background:transparent;border:0;color:#fff;cursor:pointer}
+.admin-sidebar ul{list-style:none;padding:10px 0;margin:0}
+.admin-sidebar li{padding:8px 6px}
+.admin-sidebar a{color:inherit;text-decoration:none}
+.admin-sidebar.collapsed{width:64px}
+.admin-sidebar.collapsed .logo{display:none}
+.admin-sidebar.collapsed ul li{text-align:center}
+
+.admin-layout .body{display:flex}
+.admin-layout .content{flex:1;padding:20px}

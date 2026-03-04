@@ -1,0 +1,9 @@
+<div class="role-permissions">
+  <h3>Roles & Permissions</h3>
+  <div *ngFor="let role of roles" style="border:1px solid #ddd;margin:8px;padding:8px">
+    <h4>{{role.name}}</h4>
+    <div *ngFor="let p of permissions">
+      <label><input type="checkbox" [checked]="role.permissions.includes(p)" (change)="toggle(role,p)" /> {{p}}</label>
+    </div>
+  </div>
+</div>

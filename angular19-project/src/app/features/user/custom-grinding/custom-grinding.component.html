@@ -1,0 +1,35 @@
+<div class="wizard">
+  <div class="steps">Step {{step}} / 4</div>
+
+  <div *ngIf="step===1">
+    <h3>Select Grains</h3>
+    <app-grain-selector [available]="availableGrains" (change)="onGrainsChange($event)"></app-grain-selector>
+  </div>
+
+  <div *ngIf="step===2">
+    <h3>Grinding Options</h3>
+    <app-grinding-options (select)="onGrindingSelect($event)"></app-grinding-options>
+  </div>
+
+  <div *ngIf="step===3">
+    <h3>Multigrain Addons</h3>
+    <app-multigrain-addon [addons]="addons" (change)="onAddonsChange($event)"></app-multigrain-addon>
+  </div>
+
+  <div *ngIf="step===4">
+    <h3>Review & Add to Cart</h3>
+    <div>Total Qty: {{totals.totalQty}} kg</div>
+    <div>Base: ₹{{totals.base}}</div>
+    <div>Grinding: ₹{{totals.grindCharges}}</div>
+    <div>Addons: ₹{{totals.addonCost}}</div>
+    <div><strong>Grand: ₹{{totals.grand}}</strong></div>
+    <label>Special instructions</label>
+    <textarea [formControl]="instructionsControl"></textarea>
+    <button (click)="addToCart()">Add to Cart</button>
+  </div>
+
+  <div class="nav">
+    <button (click)="prev()" [disabled]="step===1">Back</button>
+    <button (click)="next()" *ngIf="step<4">Next</button>
+  </div>
+</div>

@@ -1,0 +1,32 @@
+<div class="login-bg">
+  <div class="card" style="width:360px;max-width:90%;padding:16px;border-radius:8px;border:1px solid #eee;background:#fff">
+    <h2 style="margin-bottom:8px">Welcome back</h2>
+    <p class="muted">Sign in to continue to the dashboard</p>
+
+    <form (ngSubmit)="submit()" [formGroup]="form" style="margin-top:12px;">
+      <div style="width:100%">
+        <label>User ID</label>
+        <input style="width:100%" formControlName="userid" />
+      </div>
+
+      <div style="width:100%;margin-top:8px">
+        <label>Password</label>
+        <input style="width:100%" type="password" formControlName="password" />
+      </div>
+
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-top:12px">
+        <a class="muted" href="#">Forgot password?</a>
+        <button class="btn-gradient" type="submit" [disabled]="loading">
+          <span *ngIf="!loading">Login</span>
+          <span *ngIf="loading">Loading...</span>
+        </button>
+      </div>
+    </form>
+
+    <div *ngIf="error" style="margin-top:12px;color:#b00020">{{error}}</div>
+
+    <div style="margin-top:12px;border-top:1px dashed #eee;padding-top:12px" class="muted">
+      Demo credentials: <b>demo / demo123</b>
+    </div>
+  </div>
+</div>

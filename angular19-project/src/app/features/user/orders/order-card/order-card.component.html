@@ -1,0 +1,18 @@
+<div class="card" [ngClass]="{'order-cancelled': order.status==='cancelled'}">
+  <div class="head">
+    <strong>Order #{{order.orderId}}</strong> • {{order.shopName}} • {{order.date | date:'short'}}
+  </div>
+  <div class="body">
+    <div>Items: {{order.items.length}}</div>
+    <div>Total: ₹{{order.total}}</div>
+    <div>Status: <span class="status">{{order.status}}</span></div>
+    <div class="cancel-msg" *ngIf="order.status==='cancelled' && (order.notes || order.message)">
+      <strong>Cancellation message:</strong> {{order.notes || order.message}}
+    </div>
+  </div>
+  <div class="actions">
+    <a [routerLink]="['/user/shop', order.shopId]">View Shop</a>
+    <a [routerLink]="['/user/shop', order.shopId]">Reorder</a>
+    <a [routerLink]="['/user/order', order.orderId]">Details</a>
+  </div>
+</div>
