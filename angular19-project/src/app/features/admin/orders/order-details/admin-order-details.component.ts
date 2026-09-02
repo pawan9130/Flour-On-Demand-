@@ -4,6 +4,7 @@ import { UpdateStatusComponent } from '../update-status/update-status.component'
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AdminOrderService } from '../../services/admin-order.service';
+import { NotificationService } from '../../../../services/notification.service';
 import { formatDate } from '@angular/common';
 
 @Component({
@@ -16,7 +17,7 @@ import { formatDate } from '@angular/common';
 export class AdminOrderDetailsComponent implements OnInit {
   orderId!: string | number;
   order: any;
-  constructor(private route: ActivatedRoute, private svc: AdminOrderService, private router: Router) {}
+  constructor(private route: ActivatedRoute, private svc: AdminOrderService, private router: Router, private notifications: NotificationService) {}
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(pm => {
@@ -42,7 +43,27 @@ export class AdminOrderDetailsComponent implements OnInit {
   accept() {
     if (!this.order?.orderId) return;
     this.svc.acceptOrder(this.order.orderId).subscribe(() => {
-      alert('Thank you for accepting the order.');
+      this.notifications.pushNotification(
+        'Order Accepted',
+        `Your order #${this.order.orderId} has been accepted. We will try to deliver it to you as soon as possible.`,
+        { userId: this.order.userId, orderId: this.order.orderId }
+      );
+      alert('Order accepted. The user has been notified.');
+      this.router.navigate(['/admin/orders']);
+    });
+  }
+
+  reject() {
+    if (!this.order?.orderId) return;
+    const reason = window.prompt('Add rejection reason', 'Sorry, Wheat Flour is currently unavailable.');
+    const finalReason = (reason || '').trim() || 'Rejected by flour owner';
+    this.svc.rejectOrder(this.order.orderId, finalReason).subscribe(() => {
+      this.notifications.pushNotification(
+        'Order Rejected',
+        `We're sorry, but your order #${this.order.orderId} has been rejected by the flour owner.`,
+        { userId: this.order.userId, orderId: this.order.orderId }
+      );
+      alert('Order rejected and the user has been notified.');
       this.router.navigate(['/admin/orders']);
     });
   }

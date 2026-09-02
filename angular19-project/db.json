@@ -1,7 +1,7 @@
 {
   "products": [
     {
-      "id": 2,
+      "id": "2",
       "adminId": 2,
       "name": "Ragi (Finger Millet) 2kg",
       "slug": "ragi-2kg",
@@ -14,7 +14,7 @@
       ]
     },
     {
-      "id": 3,
+      "id": "3",
       "adminId": 1,
       "name": "Sattu Mix 1kg",
       "slug": "sattu-mix-1kg",
@@ -27,7 +27,20 @@
       ]
     },
     {
-      "id": 4,
+      "id": "10",
+      "adminId": 1,
+      "name": "millet Mix 1kg",
+      "slug": "millet-mix-1kg",
+      "categoryId": 3,
+      "price": 65,
+      "stock": 200,
+      "description": "Protein rich millet mix .",
+      "images": [
+        "/assets/products/millets-1kg.jpg"
+      ]
+    },
+    {
+      "id": "4",
       "adminId": 2,
       "name": "Corn Flour 1kg",
       "slug": "corn-flour-1kg",
@@ -40,7 +53,7 @@
       ]
     },
     {
-      "id": 5,
+      "id": "5",
       "adminId": 3,
       "name": "Mixed Millet Flour 2kg",
       "slug": "mixed-millet-2kg",
@@ -58,7 +71,7 @@
       "stock": 10,
       "category": "custom",
       "status": "active",
-      "id": 6
+      "id": "6"
     },
     {
       "adminId": 1,
@@ -71,7 +84,7 @@
       "images": [],
       "category": "custom",
       "status": "active",
-      "id": 7,
+      "id": "7",
       "imagesString": ""
     },
     {
@@ -85,7 +98,7 @@
       "images": [],
       "category": "custom",
       "status": "active",
-      "id": 10,
+      "id": "10",
       "imagesString": ""
     },
     {
@@ -99,34 +112,34 @@
       "images": [],
       "category": "custom",
       "status": "active",
-      "id": 8
+      "id": "8"
     }
   ],
   "categories": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Flours",
       "slug": "flours"
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Millets",
       "slug": "millets"
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "Ready Mixes",
       "slug": "ready-mixes"
     },
     {
-      "id": 4,
+      "id": "4",
       "name": "Grains",
       "slug": "grains"
     }
   ],
   "users": [
     {
-      "id": 1,
+      "id": "1",
       "email": "asha@example.com",
       "password": "password1",
       "name": "Asha Sharma",
@@ -158,7 +171,7 @@
       "status": "ACTIVE"
     },
     {
-      "id": 99,
+      "id": "99",
       "email": "demo",
       "password": "demo123",
       "name": "Demo User",
@@ -171,7 +184,7 @@
       "status": "ACTIVE"
     },
     {
-      "id": 2,
+      "id": "2",
       "email": "raj@example.com",
       "password": "password2",
       "name": "Raj Kumar",
@@ -200,7 +213,7 @@
   ],
   "admins": [
     {
-      "id": 1000,
+      "id": "1000",
       "name": "Super Admin",
       "email": "super@system.example",
       "password": "super123",
@@ -213,7 +226,7 @@
       "verified": true
     },
     {
-      "id": 1,
+      "id": "1",
       "name": "Priya Mills",
       "email": "priya@mills.example",
       "password": "adminpass1",
@@ -226,7 +239,7 @@
       "verified": true
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Rahul Grains",
       "email": "rahul@grains.example",
       "password": "adminpass2",
@@ -239,7 +252,7 @@
       "verified": true
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "Neha Organics",
       "email": "neha@organic.example",
       "password": "adminpass3",
@@ -265,7 +278,7 @@
         "percent": 10,
         "minimum": 0
       },
-      "id": 1001,
+      "id": "1001",
       "status": "SUSPENDED",
       "verified": true
     },
@@ -292,7 +305,7 @@
   ],
   "shops": [
     {
-      "id": 1,
+      "id": "1",
       "adminId": 1,
       "name": "Priya Flour Hub",
       "ownerName": "Priya Mills",
@@ -439,7 +452,7 @@
     {
       "userId": 2,
       "adminId": 1,
-      "status": "pending",
+      "status": "accepted",
       "items": [
         {
           "product": "rice flour ",
@@ -455,14 +468,367 @@
       "total": 555,
       "notes": "payment:COD",
       "createdAt": "2026-03-02T07:42:55.152Z",
-      "updatedAt": "2026-03-02T07:42:55.152Z",
+      "updatedAt": "2026-09-02T03:00:20.028Z",
       "id": "XqYb916"
+    },
+    {
+      "userId": "2",
+      "adminId": 1,
+      "status": "pending",
+      "items": [
+        {
+          "product": "Sattu Mix 1kg",
+          "quantityKg": 4,
+          "pricePerKg": 95
+        },
+        {
+          "product": "millet Mix 1kg",
+          "quantityKg": 1,
+          "pricePerKg": 65
+        }
+      ],
+      "total": 445,
+      "notes": "payment:COD",
+      "createdAt": "2026-09-01T13:18:30.314Z",
+      "updatedAt": "2026-09-01T13:18:30.315Z",
+      "id": "XZoDK_pt_JQ"
+    },
+    {
+      "userId": "2",
+      "adminId": 1,
+      "status": "pending",
+      "items": [
+        {
+          "product": "millet Mix 1kg",
+          "quantityKg": 1,
+          "pricePerKg": 65
+        }
+      ],
+      "total": 65,
+      "notes": "payment:COD",
+      "createdAt": "2026-09-02T02:44:56.046Z",
+      "updatedAt": "2026-09-02T02:44:56.046Z",
+      "id": "w4FmzkHwt4s"
+    },
+    {
+      "userId": 2,
+      "adminId": 1,
+      "status": "placed",
+      "items": [
+        {
+          "product": "Sattu Mix 1kg",
+          "quantityKg": 1,
+          "pricePerKg": 95,
+          "comment": "",
+          "productComment": "",
+          "name": "Sattu Mix 1kg",
+          "qty": 1,
+          "price": 95
+        },
+        {
+          "product": "millet Mix 1kg",
+          "quantityKg": 1,
+          "pricePerKg": 65,
+          "comment": "",
+          "productComment": "",
+          "name": "millet Mix 1kg",
+          "qty": 1,
+          "price": 65
+        },
+        {
+          "product": "rice flour ",
+          "quantityKg": 1,
+          "pricePerKg": 40.5,
+          "comment": "",
+          "productComment": "",
+          "name": "rice flour ",
+          "qty": 1,
+          "price": 40.5
+        },
+        {
+          "product": "besan ",
+          "quantityKg": 1,
+          "pricePerKg": 75,
+          "comment": "",
+          "productComment": "",
+          "name": "besan ",
+          "qty": 1,
+          "price": 75
+        }
+      ],
+      "total": 275.5,
+      "notes": "payment:COD",
+      "comment": "",
+      "instructions": "",
+      "customerComment": "",
+      "paymentMethod": "cod",
+      "deliverySlot": "10am-12pm",
+      "deliveryAddress": {
+        "name": "Asha Sharma",
+        "phone": "9000000000",
+        "line1": "12 Market Street, Bengaluru - 560001"
+      },
+      "createdAt": "2026-09-02T02:57:29.097Z",
+      "updatedAt": "2026-09-02T02:57:29.097Z",
+      "id": "EIAleOXed8I"
+    },
+    {
+      "userId": 2,
+      "adminId": 1,
+      "status": "placed",
+      "items": [
+        {
+          "product": "Sattu Mix 1kg",
+          "quantityKg": 1,
+          "pricePerKg": 95,
+          "comment": "",
+          "productComment": "",
+          "name": "Sattu Mix 1kg",
+          "qty": 1,
+          "price": 95
+        },
+        {
+          "product": "millet Mix 1kg",
+          "quantityKg": 1,
+          "pricePerKg": 65,
+          "comment": "",
+          "productComment": "",
+          "name": "millet Mix 1kg",
+          "qty": 1,
+          "price": 65
+        },
+        {
+          "product": "rice flour ",
+          "quantityKg": 1,
+          "pricePerKg": 40.5,
+          "comment": "",
+          "productComment": "",
+          "name": "rice flour ",
+          "qty": 1,
+          "price": 40.5
+        },
+        {
+          "product": "besan ",
+          "quantityKg": 1,
+          "pricePerKg": 75,
+          "comment": "",
+          "productComment": "",
+          "name": "besan ",
+          "qty": 1,
+          "price": 75
+        }
+      ],
+      "total": 275.5,
+      "notes": "payment:COD | test",
+      "comment": "test",
+      "instructions": "test",
+      "customerComment": "test",
+      "paymentMethod": "cod",
+      "deliverySlot": "10am-12pm",
+      "deliveryAddress": {
+        "name": "Asha Sharma",
+        "phone": "9000000000",
+        "line1": "12 Market Street, Bengaluru - 560001"
+      },
+      "createdAt": "2026-09-02T03:01:23.985Z",
+      "updatedAt": "2026-09-02T03:01:23.985Z",
+      "id": "jZe64YlbAH8"
+    },
+    {
+      "userId": 2,
+      "adminId": 1,
+      "status": "placed",
+      "items": [
+        {
+          "product": "Sattu Mix 1kg",
+          "quantityKg": 3,
+          "pricePerKg": 95,
+          "comment": "",
+          "productComment": "",
+          "name": "Sattu Mix 1kg",
+          "qty": 3,
+          "price": 95
+        },
+        {
+          "product": "Wheat flour",
+          "quantityKg": 3,
+          "pricePerKg": 45.5,
+          "comment": "",
+          "productComment": "",
+          "name": "Wheat flour",
+          "qty": 3,
+          "price": 45.5
+        },
+        {
+          "product": "rice flour ",
+          "quantityKg": 3,
+          "pricePerKg": 40.5,
+          "comment": "",
+          "productComment": "",
+          "name": "rice flour ",
+          "qty": 3,
+          "price": 40.5
+        },
+        {
+          "product": "besan ",
+          "quantityKg": 3,
+          "pricePerKg": 75,
+          "comment": "",
+          "productComment": "",
+          "name": "besan ",
+          "qty": 3,
+          "price": 75
+        }
+      ],
+      "total": 768,
+      "notes": "payment:COD | test 2",
+      "comment": "test 2",
+      "instructions": "test 2",
+      "customerComment": "test 2",
+      "paymentMethod": "cod",
+      "deliverySlot": "10am-12pm",
+      "deliveryAddress": {
+        "name": "Asha Sharma",
+        "phone": "9000000000",
+        "line1": "12 Market Street, Bengaluru - 560001"
+      },
+      "createdAt": "2026-09-02T03:04:48.795Z",
+      "updatedAt": "2026-09-02T03:04:48.795Z",
+      "id": "3808KjPOUZk"
+    },
+    {
+      "userId": 2,
+      "adminId": 1,
+      "status": "accepted",
+      "items": [
+        {
+          "product": "Sattu Mix 1kg",
+          "quantityKg": 3,
+          "pricePerKg": 95,
+          "comment": "",
+          "productComment": "",
+          "name": "Sattu Mix 1kg",
+          "qty": 3,
+          "price": 95
+        },
+        {
+          "product": "Wheat flour",
+          "quantityKg": 3,
+          "pricePerKg": 45.5,
+          "comment": "",
+          "productComment": "",
+          "name": "Wheat flour",
+          "qty": 3,
+          "price": 45.5
+        },
+        {
+          "product": "rice flour ",
+          "quantityKg": 3,
+          "pricePerKg": 40.5,
+          "comment": "",
+          "productComment": "",
+          "name": "rice flour ",
+          "qty": 3,
+          "price": 40.5
+        },
+        {
+          "product": "besan ",
+          "quantityKg": 3,
+          "pricePerKg": 75,
+          "comment": "",
+          "productComment": "",
+          "name": "besan ",
+          "qty": 3,
+          "price": 75
+        }
+      ],
+      "total": 768,
+      "notes": "payment:COD",
+      "comment": "",
+      "instructions": "",
+      "customerComment": "",
+      "paymentMethod": "cod",
+      "deliverySlot": "10am-12pm",
+      "deliveryAddress": {
+        "name": "Asha Sharma",
+        "phone": "9000000000",
+        "line1": "12 Market Street, Bengaluru - 560001"
+      },
+      "createdAt": "2026-09-02T03:17:16.334Z",
+      "updatedAt": "2026-09-02T03:17:37.925Z",
+      "id": "wBH0OhB058g"
+    },
+    {
+      "userId": 2,
+      "adminId": 1,
+      "status": "accepted",
+      "items": [
+        {
+          "product": "Sattu Mix 1kg",
+          "quantityKg": 3,
+          "pricePerKg": 95,
+          "comment": "",
+          "productComment": "",
+          "name": "Sattu Mix 1kg",
+          "qty": 3,
+          "price": 95
+        },
+        {
+          "product": "Wheat flour",
+          "quantityKg": 3,
+          "pricePerKg": 45.5,
+          "comment": "",
+          "productComment": "",
+          "name": "Wheat flour",
+          "qty": 3,
+          "price": 45.5
+        },
+        {
+          "product": "rice flour ",
+          "quantityKg": 3,
+          "pricePerKg": 40.5,
+          "comment": "",
+          "productComment": "",
+          "name": "rice flour ",
+          "qty": 3,
+          "price": 40.5
+        },
+        {
+          "product": "besan ",
+          "quantityKg": 3,
+          "pricePerKg": 75,
+          "comment": "",
+          "productComment": "",
+          "name": "besan ",
+          "qty": 3,
+          "price": 75
+        }
+      ],
+      "total": 768,
+      "notes": "payment:COD",
+      "comment": "",
+      "instructions": "",
+      "customerComment": "",
+      "additionalComments": "",
+      "paymentMethod": "cod",
+      "deliverySlot": "10am-12pm",
+      "deliveryAddress": {
+        "name": "Asha Sharma",
+        "phone": "9000000000",
+        "line1": "12 Market Street, Bengaluru - 560001"
+      },
+      "createdAt": "2026-09-02T03:25:16.017Z",
+      "updatedAt": "2026-09-02T03:26:04.802Z",
+      "id": "z034YLp92Po",
+      "acceptedDate": "2026-09-02T03:26:04.802Z",
+      "rejectedDate": null,
+      "rejectionReason": ""
     }
   ],
   "payments": [],
   "carts": [
     {
-      "id": 1,
+      "id": "1",
       "userId": 1,
       "items": [
         {
@@ -478,5 +844,6 @@
       "radiusKm": 10,
       "minOrder": 50
     }
-  }
+  },
+  "$schema": "./node_modules/json-server/schema.json"
 }

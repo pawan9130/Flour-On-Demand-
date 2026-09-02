@@ -22,7 +22,24 @@
 
   <div *ngIf="step===4">
     <h3>Review & Place</h3>
-    <div *ngFor="let it of items">{{it.type || it.model?.grains?.[0]?.name || 'Item'}}</div>
+    <div *ngFor="let it of items" class="item-review">
+      <div>
+        <div>{{it.name || it.product || it.type || it.model?.grains?.[0]?.name || 'Item'}}</div>
+        <small *ngIf="it.model?.comments || it.productComment || it.comment">Comment: {{it.model?.comments || it.productComment || it.comment}}</small>
+      </div>
+      <div>Qty: {{it.qty || it.quantityKg || 1}}</div>
+      <div>Price: ₹{{it.price || it.priceBreakup || 0}}</div>
+    </div>
+
+    <label class="comment-box">
+      <span>Additional Order Comments / Instructions (Optional)</span>
+      <textarea [(ngModel)]="comment" rows="4" placeholder="Please deliver all products together after 6 PM."></textarea>
+    </label>
+
+    <div *ngIf="comment?.trim()" class="comment-preview">
+      <strong>Order Comment:</strong> {{comment.trim()}}
+    </div>
+
     <button (click)="prev()">Back</button>
     <button (click)="placeOrder()">Place Order</button>
   </div>

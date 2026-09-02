@@ -45,7 +45,7 @@ export class AdminOrderService {
     );
   }
 
-  getOrderDetails(orderId: number): Observable<any> {
+  getOrderDetails(orderId: string | number): Observable<any> {
     // fetch order and the associated user profile/address
     return this.api.get<any>('orders', orderId).pipe(
       switchMap(order => {
@@ -70,14 +70,37 @@ export class AdminOrderService {
     );
   }
 
-  updateOrderStatus(orderId:number, status:string, notes?:string): Observable<any>{
-    // update by id
-    return this.api.patch('orders', orderId, { status, notes });
+  updateOrderStatus(orderId:string | number, status:string, notes?:string): Observable<any>{
+    const payload: any = {
+      status,
+      notes,
+      updatedAt: new Date().toISOString()
+    };
+
+    if (status === 'accepted') {
+      payload.acceptedDate = new Date().toISOString();
+      payload.rejectedDate = null;
+      payload.rejectionReason = '';
+    }
+
+    if (status === 'rejected') {
+      payload.rejectedDate = new Date().toISOString();
+      payload.rejectionReason = notes || 'Rejected by flour owner';
+      payload.acceptedDate = null;
+    }
+
+    if (status === 'pending') {
+      payload.acceptedDate = null;
+      payload.rejectedDate = null;
+      payload.rejectionReason = '';
+    }
+
+    return this.api.patch('orders', orderId, payload);
   }
 
   acceptOrder(orderId:number): Observable<any>{ return this.updateOrderStatus(orderId,'accepted'); }
-  rejectOrder(orderId:number, reason?:string): Observable<any>{ return this.updateOrderStatus(orderId,'cancelled'); }
-  cancelOrder(orderId:number, reason?:string): Observable<any>{ return this.updateOrderStatus(orderId,'cancelled'); }
+  rejectOrder(orderId:number, reason?:string): Observable<any>{ return this.updateOrderStatus(orderId,'rejected', reason || 'Rejected by flour owner'); }
+  cancelOrder(orderId:number, reason?:string): Observable<any>{ return this.updateOrderStatus(orderId,'cancelled', reason || 'Cancelled by flour owner'); }
 
   getOrderTimeline(orderId:number): Observable<any[]>{ return of([{step:'Placed',time:new Date().toISOString()},{step:'Accepted'}]); }
 }

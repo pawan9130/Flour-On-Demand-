@@ -42,15 +42,19 @@ button, input, select, textarea {
   background: #a8a8a8;
 }
 
-/* Theme variables (wheat / earthy) */
+/* Marketplace theme */
 :root {
-  --color-wheat: #F5DEB3;
-  --color-earth: #8B4513;
-  --color-deep: #2E5C4E;
-  --bg: #fff8f0;
-  --text: #2b2b2b;
-  --muted: #7a7a7a;
-  --shadow: 0 6px 18px rgba(46,92,78,0.08);
+  --color-wheat: #f4c95d;
+  --color-earth: #7c3f17;
+  --color-deep: #176b4d;
+  --color-fresh: #22a06b;
+  --color-ink: #18231f;
+  --color-panel: #ffffff;
+  --color-line: #e5e7eb;
+  --bg: #f6f7f2;
+  --text: #1f2a24;
+  --muted: #6b7280;
+  --shadow: 0 14px 34px rgba(24, 35, 31, 0.08);
 
   /* Breakpoints */
   --bp-xs: 0px;
@@ -71,10 +75,30 @@ body { font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helv
 }
 
 /* Card */
-.card { background: white; border-radius: 12px; box-shadow: var(--shadow); padding: 16px; }
+.card { background: white; border: 1px solid var(--color-line); border-radius: 8px; box-shadow: var(--shadow); padding: 16px; }
 
-/* Gradients */
-.btn-gradient { background: linear-gradient(135deg, var(--color-wheat), var(--color-deep)); color: #fff; border: none; padding: 10px 16px; border-radius: 8px; box-shadow: 0 6px 14px rgba(46,92,78,0.12); }
+/* Shared market UI */
+.btn-gradient, .market-btn { background: var(--color-deep); color: #fff; border: none; padding: 10px 16px; border-radius: 8px; box-shadow: 0 6px 14px rgba(23,107,77,0.16); cursor: pointer; font-weight: 700; }
+.market-btn.secondary { background: #fff; color: var(--color-deep); border: 1px solid #bdd7ca; box-shadow: none; }
+.market-input, input, select, textarea { border: 1px solid #d8ddd8; border-radius: 8px; padding: 10px 12px; background: #fff; color: var(--text); }
+button { cursor: pointer; }
+a { color: var(--color-deep); font-weight: 700; text-decoration: none; }
+.page-shell { max-width: 1180px; margin: 0 auto; padding: 24px; }
+.page-title { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; margin-bottom: 18px; }
+.page-title h1, .page-title h2, .page-title h3 { margin: 0; line-height: 1.15; color: var(--color-ink); }
+.eyebrow { color: var(--color-deep); font-size: 12px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+.status-chip { display: inline-flex; align-items: center; gap: 6px; min-height: 28px; padding: 4px 10px; border-radius: 999px; background: #eef8f2; color: #176b4d; font-size: 12px; font-weight: 800; text-transform: capitalize; }
+.status-chip.cancelled { background: #fff1f2; color: #be123c; }
+.status-chip.delivered { background: #ecfdf5; color: #047857; }
+.status-chip.placed, .status-chip.pending { background: #fffbeb; color: #92400e; }
+.market-grid { display: grid; gap: 16px; }
+.market-grid.cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+@media (max-width: 900px) {
+  .page-shell { padding: 16px; }
+  .page-title { align-items: flex-start; flex-direction: column; }
+  .market-grid.cols-3 { grid-template-columns: 1fr; }
+}
 
 /* Animations */
 @keyframes pulse { 0% { opacity: 0.6 } 50% { opacity: 1 } 100% { opacity: 0.6 } }

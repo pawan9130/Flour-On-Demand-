@@ -1,22 +1,38 @@
-<div class="cart-page">
-  <h3>Your Cart</h3>
-  <div *ngIf="items.length===0" class="empty">Cart is empty. <a routerLink="/user/browse">Browse Shops</a></div>
-
-  <div *ngFor="let it of items; let i = index" class="cart-item">
-    <div class="left">{{it.type || it.model?.grains?.[0]?.name || 'Item'}}</div>
-    <div class="center">Qty: {{it.qty || 1}}</div>
-    <div class="right">₹{{(it.price || it.priceBreakup || 0)}}</div>
-    <div class="actions">
-      <button (click)="decrease(i)">-</button>
-      <button (click)="increase(i)">+</button>
-      <button (click)="remove(i)">Remove</button>
+<div class="cart-page page-shell">
+  <section class="cart-main">
+    <div class="page-title">
+      <div>
+        <div class="eyebrow">Checkout basket</div>
+        <h2>Your Cart</h2>
+      </div>
+      <a routerLink="/user/browse">Add more</a>
     </div>
-  </div>
+
+    <div *ngIf="items.length===0" class="empty card">Cart is empty. <a routerLink="/user/browse">Browse shops</a></div>
+
+    <div *ngFor="let it of items; let i = index" class="cart-item">
+      <div class="item-main">
+        <div class="item-image" [style.background-image]="'url(' + getItemImage(it) + ')'" aria-label="Product image"></div>
+        <div class="item-copy">
+          <strong>{{it.name || it.product || it.type || it.model?.grains?.[0]?.name || 'Flour item'}}</strong>
+          <p>{{it.model?.grindingSize || 'Fresh mill order'}} - {{it.model?.comments || 'COD available'}}</p>
+        </div>
+      </div>
+      <div class="qty">Qty: {{it.qty || it.quantityKg || 1}} kg</div>
+      <div class="price">Rs. {{(it.price || it.priceBreakup || 0)}}</div>
+      <div class="actions">
+        <button (click)="decrease(i)">-</button>
+        <button (click)="increase(i)">+</button>
+        <button class="remove" (click)="remove(i)">Remove</button>
+      </div>
+    </div>
+  </section>
 
   <aside class="summary">
-    <div>Subtotal: ₹{{total}}</div>
-    <div>Delivery: ₹0</div>
-    <div><strong>Total: ₹{{total}}</strong></div>
-    <a routerLink="/user/checkout">Proceed to Checkout</a>
+    <h3>Order Summary</h3>
+    <div><span>Subtotal</span><strong>Rs. {{total}}</strong></div>
+    <div><span>Delivery</span><strong>Rs. 0</strong></div>
+    <div class="grand"><span>Total</span><strong>Rs. {{total}}</strong></div>
+    <a class="market-btn" routerLink="/user/checkout">Proceed to Checkout</a>
   </aside>
 </div>

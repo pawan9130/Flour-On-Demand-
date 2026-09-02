@@ -8,6 +8,7 @@ import { OrdersService } from '../../services/orders.service';
 import { AuthService } from '../../services/auth.service';
 import { OrderModalComponent } from './order-modal.component';
 import { SummaryModalComponent } from './summary-modal.component';
+import { WishlistService } from '../../services/wishlist.service';
 
 
 @Component({
@@ -56,6 +57,7 @@ import { SummaryModalComponent } from './summary-modal.component';
               <input type="number" step="0.5" [(ngModel)]="p._qty" />
               <button (click)="changeQty(p,0.5)">+</button>
             </div>
+            <button class="wishlist-btn" (click)="addToWishlist(p)">ADD TO WISHLIST</button>
             <button class="order-btn" (click)="addToCart(p)">ORDER NOW</button>
           </div>
         </div>
@@ -77,17 +79,20 @@ import { SummaryModalComponent } from './summary-modal.component';
     `
     .top{display:flex;align-items:center;gap:12px}
     .filters-row{display:flex;justify-content:space-between;align-items:center;margin:12px 0}
-    .products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
-    .product-card{background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 6px 18px rgba(0,0,0,0.06);display:flex;flex-direction:column}
-    .product-image{height:160px;background-size:cover;background-position:center}
-    .pcontent{padding:12px;display:flex;flex-direction:column;gap:8px}
-    .phead{display:flex;justify-content:space-between;align-items:center}
-    .pname{font-weight:700}
+    .products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;align-items:stretch}
+    .product-card{background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 6px 18px rgba(0,0,0,0.06);display:flex;flex-direction:column;min-width:0;max-width:100%}
+    .product-image{height:160px;background-size:cover;background-position:center;background-repeat:no-repeat;flex-shrink:0}
+    .pcontent{padding:12px;display:flex;flex-direction:column;gap:8px;min-width:0}
+    .phead{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;min-width:0}
+    .pname{font-weight:700;overflow-wrap:anywhere}
+    .plocal,.pmeta{overflow-wrap:anywhere}
     .badge{background:#fff6e6;padding:4px 8px;border-radius:10px;margin-right:6px;font-size:12px}
-    .actions{display:flex;justify-content:space-between;align-items:center;margin-top:8px}
-    .quantity-selector{display:inline-flex;align-items:center;background:#f5f5f5;padding:4px;border-radius:999px}
-    .quantity-selector button{width:36px;height:36px;border-radius:50%;border:none;background:#fff;color:#333}
-    .order-btn{background:linear-gradient(45deg,#4CAF50,#45a049);color:#fff;border:none;padding:8px 14px;border-radius:50px}
+    .actions{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:8px;flex-wrap:wrap}
+    .quantity-selector{display:inline-flex;align-items:center;background:#f5f5f5;padding:4px;border-radius:999px;min-width:0}
+    .quantity-selector button{width:36px;height:36px;border-radius:50%;border:none;background:#fff;color:#333;flex-shrink:0}
+    .quantity-selector input{width:56px;border:none;background:transparent;text-align:center;outline:none}
+    .order-btn, .wishlist-btn{background:linear-gradient(45deg,#4CAF50,#45a049);color:#fff;border:none;padding:8px 14px;border-radius:50px;white-space:nowrap;flex-shrink:0;cursor:pointer}
+    .wishlist-btn{background:linear-gradient(45deg,#f59e0b,#f97316)}
     .notify{background:#f0fff4;border:1px solid #d4f2d9;padding:8px;border-radius:8px;margin:8px 0;color:#1b6b2d}
     .overlay{position:fixed;inset:0;background:rgba(0,0,0,0.45);display:flex;align-items:center;justify-content:center;z-index:2000}
     .modal{background:#fff;border-radius:12px;width:720px;max-width:95%;padding:16px;position:relative}
@@ -109,6 +114,7 @@ export class AdminProductsComponent {
   private ordersSvc = inject(OrdersService);
   public auth = inject(AuthService);
   private route = inject(ActivatedRoute);
+  private wishlistService = inject(WishlistService);
 
   constructor() {
     const id = Number(this.route.snapshot.paramMap.get('id')) || 0;
@@ -127,6 +133,28 @@ export class AdminProductsComponent {
     p._qty = Math.max(0.5, Math.round(((p._qty || 0) + delta) * 2) / 2);
   }
 
+  addToWishlist(p: any) {
+    const item = {
+      id: p.id,
+      productId: p.id,
+      name: p.name,
+      description: p.description || `${p.name} is a premium flour product from ${this.adminName}.`,
+      price: Number(p.price || 0),
+      category: p.category || 'Flour',
+      image: p.images?.[0] || '/assets/placeholder.png',
+      stock: p.stock || 0,
+      readyIn: p.readyIn || '30 mins',
+      adminId: this.adminId,
+      adminName: this.adminName,
+      quantity: Number(p._qty || 1),
+      productComment: ''
+    };
+
+    this.wishlistService.addItem(item);
+    this.message = 'Product added to wishlist.';
+    setTimeout(() => this.message = null, 2500);
+  }
+
   addToCart(p: any) {
     // open modal for final confirmation / quantity selection
     this.selectedProduct = p;
@@ -142,7 +170,8 @@ export class AdminProductsComponent {
   onModalAddNew(payload: { product: any; qty: number }) {
     this.selectedProducts.push(payload);
     this.closeModal();
-    // show confirmation that product was added
+    const item = payload.product;
+    this.addToWishlist(item);
     this.message = 'Your product has been added to the wishlist.';
     setTimeout(()=> this.message = null, 3000);
   }

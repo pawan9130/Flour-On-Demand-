@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { CartService } from '../../../services/cart.service';
 import { NotificationService } from '../../../services/notification.service';
 import { AuthService } from '../../../services/auth.service';
+import { WishlistService } from '../../../services/wishlist.service';
 
 @Component({
   selector: 'app-user-header',
@@ -15,11 +16,19 @@ import { AuthService } from '../../../services/auth.service';
 export class UserHeaderComponent {
   query = '';
   cartCount = 0;
+  wishlistCount = 0;
   notifications = 0;
   currentUser: any = null;
 
-  constructor(private router: Router, private cart: CartService, private notificationsSvc: NotificationService, private auth: AuthService) {
+  constructor(
+    private router: Router,
+    private cart: CartService,
+    private notificationsSvc: NotificationService,
+    private auth: AuthService,
+    private wishlistService: WishlistService
+  ) {
     this.cart.cartCount$.subscribe(c => this.cartCount = c);
+    this.wishlistService.count$.subscribe(c => this.wishlistCount = c);
     this.notificationsSvc.unreadCount$.subscribe(n => this.notifications = n);
     this.auth.currentUser$.subscribe(u => this.currentUser = u);
   }
@@ -41,7 +50,8 @@ export class UserHeaderComponent {
     this.router.navigate(['/user'], { queryParams: { q: this.query } });
   }
 
-  goToCart() { this.router.navigate(['/cart']); }
+  goToCart() { this.router.navigate(['/user/cart']); }
+  goToWishlist() { this.router.navigate(['/user/wishlist']); }
 
   logout() { this.auth.logout(); this.router.navigate(['/login']); }
 }

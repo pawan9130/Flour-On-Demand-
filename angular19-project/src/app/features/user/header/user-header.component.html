@@ -9,6 +9,7 @@
   </div>
 
   <div class="right">
+    <button class="icon" (click)="goToWishlist()">💙 <span class="badge" *ngIf="wishlistCount">{{wishlistCount}}</span></button>
     <button class="icon" (click)="goToCart()">🛒 <span class="badge" *ngIf="cartCount">{{cartCount}}</span></button>
     <button class="icon">🔔 <span class="badge" *ngIf="notifications">{{notifications}}</span></button>
     <div class="profile">

@@ -1,21 +1,24 @@
 .app-bar {
-  height: 56px;
+  height: 64px;
   display: flex;
   align-items: center;
-  padding: 0 16px;
-  background: #ffffff;
-  border-bottom: 1px solid #e2e8f0;
+  padding: 0 22px;
+  background: rgba(255,255,255,.94);
+  border-bottom: 1px solid #e5e7eb;
+  backdrop-filter: blur(12px);
   position: sticky;
   top: 0;
   z-index: 10;
 }
-.brand { font-weight: 700; color: #2d3748; }
+.brand { display:flex; align-items:center; gap:10px; font-weight: 900; color: #18231f; letter-spacing:.02em; }
+.brand-mark { display:grid; place-items:center; width:34px; height:34px; border-radius:8px; color:#fff; background:#176b4d; }
 .spacer { flex: 1; }
 .user { display: flex; align-items: center; gap: 10px; }
 .name { color: #4a5568; font-weight: 600; }
 .avatar { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; border: 1px solid #e2e8f0; }
+.btn-plain { margin-left:8px; border:1px solid #d8ddd8; color:#176b4d; background:#fff; border-radius:8px; padding:8px 12px; font-weight:700; }
 
-.app-content { min-height: calc(100vh - 56px); background: #fafafa; }
+.app-content { min-height: calc(100vh - 64px); background: #f6f7f2; }
 
 
 

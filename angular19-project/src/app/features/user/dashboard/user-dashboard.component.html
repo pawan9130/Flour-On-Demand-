@@ -1,32 +1,46 @@
-<div class="orders-container">
-  <div class="orders-header">
-    <h1>Choose Your Service</h1>
-    <p>Select a service to continue</p>
+<div class="orders-container page-shell">
+  <section class="market-hero">
+    <div>
+      <div class="eyebrow">Fresh flour marketplace</div>
+      <h1>Order fresh grinding from trusted local mills.</h1>
+      <p>Choose a shop, customize grain size and additions, checkout with COD, and track every step until delivery.</p>
+      <div class="hero-actions">
+        <button class="market-btn" (click)="navigateToTab('/user/browse')">Browse mills</button>
+        <button class="market-btn secondary" (click)="navigateToTab('/user/orders')">Track orders</button>
+      </div>
+    </div>
+    <div class="hero-panel">
+      <span class="status-chip placed">COD live</span>
+      <strong>Today's popular order</strong>
+      <p>Wheat flour, medium grind, 5 kg</p>
+      <small>Ready in 2-4 hours from nearby shops</small>
+    </div>
+  </section>
+
+  <div class="page-title">
+    <div>
+      <div class="eyebrow">Start order</div>
+      <h2>Choose a service</h2>
+    </div>
   </div>
 
   <div class="tabs-grid">
-    <div class="tab-card" (click)="navigateToTab('/user/flour-order')">
-      <div class="tab-icon">🌾</div>
-      <h3>Flour Order</h3>
-      <p>Place a fresh flour order</p>
-    </div>
+    <button class="tab-card" (click)="navigateToTab('/user/custom-flour-order')">
+      <span class="tab-icon">CG</span>
+      <h3>Custom Grain Grinding</h3>
+      <p>Select grains, grind size, quantity, and multigrain additions.</p>
+    </button>
 
-     <div class="tab-card" (click)="navigateToTab('/user/custom-flour-order')">
-      <div class="tab-icon">🌾🔧</div>
-      <h3>Custom Flour Order</h3>
-      <p>Place a fresh flour order</p>
-    </div>
+    <button class="tab-card" (click)="navigateToTab('/user/flour-order')">
+      <span class="tab-icon">RF</span>
+      <h3>Readymade Flour</h3>
+      <p>Shop fresh wheat, ragi, sattu, millet, and daily flour packs.</p>
+    </button>
 
-    <div class="tab-card" (click)="navigateToTab('/millet-grinding')">
-      <div class="tab-icon">🔧</div>
-      <h3>Millet Grinding</h3>
-      <p>Custom grinding services</p>
-    </div>
-
-    <div class="tab-card" (click)="navigateToTab('/bulk-order')">
-      <div class="tab-icon">📦</div>
+    <button class="tab-card" (click)="navigateToTab('/user/browse')">
+      <span class="tab-icon">BO</span>
       <h3>Bulk Orders</h3>
-      <p>Order in bulk for businesses</p>
-    </div>
+      <p>Order above 10 kg with package sizes and wholesale pricing.</p>
+    </button>
   </div>
 </div>

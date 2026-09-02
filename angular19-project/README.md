@@ -1,29 +1,31 @@
-# Angular19Project
+# FLOUR ON DEMAND
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.0.6.
+FLOUR ON DEMAND is an Angular 19 web application for a multi-vendor grain grinding and flour ordering platform. The workspace includes user, admin, and super-admin surfaces for shop browsing, product management, ordering, tracking, feedback, finance, and platform operations.
+
+See the full product blueprint in [docs/PROJECT_BLUEPRINT.md](docs/PROJECT_BLUEPRINT.md).
 
 ## Development server
 
 To start a local development server, run:
 
 ```bash
-ng serve
+npm start
 ```
 
 Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
 
-## Code scaffolding
+## Mock API Server
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+The project includes a JSON-backed mock API for local development:
 
 ```bash
-ng generate component component-name
+npm run mock:server
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+For auto-reloading mock API development:
 
 ```bash
-ng generate --help
+npm run mock:server:reload
 ```
 
 ## Building
@@ -31,7 +33,7 @@ ng generate --help
 To build the project run:
 
 ```bash
-ng build
+npm run build
 ```
 
 This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
@@ -41,19 +43,21 @@ This will compile your project and store the build artifacts in the `dist/` dire
 To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
 
 ```bash
-ng test
+npm test
 ```
 
-## Running end-to-end tests
+## Product Areas
 
-For end-to-end (e2e) testing, run:
+- User app: shop browsing, custom grinding, cart, checkout, orders, profile, feedback.
+- Admin app: dashboard, shop profile, products, order management, reports.
+- Super-admin app: dashboard, admin management, user management, all orders, finance, settings.
 
-```bash
-ng e2e
-```
+## Suggested MVP
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- Role-based authentication.
+- Admin product management.
+- User order placement.
+- Basic order tracking.
+- Cash on Delivery.
+- Feedback and ratings.
+- Basic dashboards.

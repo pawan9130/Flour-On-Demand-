@@ -7,6 +7,6 @@
   </div>
 
   <div class="list">
-    <app-order-card *ngFor="let o of orders" [order]="o"></app-order-card>
+    <app-order-card *ngFor="let o of orders" [order]="o" (orderAgain)="orderAgain($event)"></app-order-card>
   </div>
 </div>

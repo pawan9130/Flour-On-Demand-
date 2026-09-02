@@ -8,6 +8,7 @@ export interface CartItem {
   qty?: number;
   price?: number;
   type?: string; // e.g., product, custom-grinding
+  name?: string;
   model?: any;
 }
 

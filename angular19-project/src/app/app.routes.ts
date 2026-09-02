@@ -62,6 +62,7 @@ export const routes: Routes = [
       { path: 'browse', loadComponent: () => import('./features/user/shops/shop-list/shop-list.component').then(m => m.ShopListComponent) },
       { path: 'shop/:id', loadComponent: () => import('./features/user/shops/shop-details/shop-details.component').then(m => m.ShopDetailsComponent) },
       { path: 'cart', loadComponent: () => import('./features/user/cart/cart/cart.component').then(m => m.CartComponent) },
+      { path: 'wishlist', loadComponent: () => import('./features/user/wishlist/wishlist-list.component').then(m => m.UserWishlistListComponent) },
       { path: 'checkout', loadComponent: () => import('./features/user/cart/checkout/checkout.component').then(m => m.CheckoutComponent) },
       { path: 'orders', loadComponent: () => import('./features/user/orders/order-list/order-list.component').then(m => m.OrderListComponent) },
       { path: 'order/:id', loadComponent: () => import('./features/user/orders/order-details/order-details.component').then(m => m.OrderDetailsComponent) },

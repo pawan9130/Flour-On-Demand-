@@ -4,6 +4,7 @@ import { OrdersService } from '../../../../services/orders.service';
 import { OrderCardComponent } from '../../../user/components/order-card.component';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../../services/auth.service';
+import { CartService } from '../../../../services/cart.service';
 
 @Component({
   selector: 'app-order-list',
@@ -17,7 +18,7 @@ export class OrderListComponent implements OnInit {
   tab: 'all' | 'active' | 'completed' | 'cancelled' = 'all';
   loading = true;
 
-  constructor(private orderSvc: OrdersService, private router: Router, private auth: AuthService) {}
+  constructor(private orderSvc: OrdersService, private router: Router, private auth: AuthService, private cart: CartService) {}
 
   ngOnInit(): void { this.load(); }
 
@@ -38,4 +39,25 @@ export class OrderListComponent implements OnInit {
   setTab(t: any) { this.tab = t; this.load(); }
   open(id: any) { this.router.navigate(['/user/order', id]); }
   track(id: any) { this.router.navigate(['/user/track', id]); }
+
+  orderAgain(order: any) {
+    const items = Array.isArray(order?.items) ? order.items : [];
+    if (!items.length) return;
+
+    items.forEach((it: any) => {
+      const productName = it.product || it.name || 'Flour product';
+      const qty = Number(it.quantityKg || it.qty || 1);
+      const price = Number(it.pricePerKg || it.price || order.total || 0);
+      this.cart.addToCart({
+        id: `${order.id || 'repeat'}-${productName}`,
+        shopId: order.adminId || 1,
+        qty,
+        price,
+        name: productName,
+        model: { name: productName, comments: order.comment || order.instructions || order.customerComment || '' }
+      });
+    });
+
+    this.router.navigate(['/user/checkout']);
+  }
 }
