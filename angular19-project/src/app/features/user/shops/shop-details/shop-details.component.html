@@ -15,7 +15,11 @@
   </nav>
 
   <section class="products">
-    <div class="grid">
+    <div *ngIf="products.length === 0" class="empty-state">
+      No products available for this shop owner.
+    </div>
+
+    <div *ngIf="products.length > 0" class="grid">
       <app-product-card *ngFor="let p of products" [product]="p"></app-product-card>
     </div>
   </section>

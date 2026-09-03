@@ -3,13 +3,16 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ApiService } from '../../../services/api.service';
 
+export type ProductType = 'Bulk' | 'ReadyMade';
+
 export interface Product {
   id: number;
-  adminId?: number;
+  adminId?: number | string;
   name: string;
   slug?: string;
   categoryId?: number;
   category: string;
+  productType?: ProductType | string;
   price: number;
   stock: number;
   description?: string;
@@ -19,6 +22,23 @@ export interface Product {
 
 @Injectable({ providedIn: 'root' })
 export class ProductService {
+  static normalizeProductType(value?: string | null): ProductType {
+    const normalized = (value || '').toString().trim().toLowerCase().replace(/[-_\s]+/g, '');
+    if (normalized === 'bulk' || normalized === 'bulkorder') return 'Bulk';
+    if (normalized === 'readymade' || normalized === 'readymade' || normalized === 'ready-made' || normalized === 'ready_made') return 'ReadyMade';
+    return 'ReadyMade';
+  }
+
+  static filterProductsByType(list: Product[], productType: 'Bulk' | 'ReadyMade'): Product[] {
+    const type = ProductService.normalizeProductType(productType);
+    return (list || []).filter((p: Product) => {
+      const productTypeValue = ProductService.normalizeProductType(
+        (p as any).productType || (p as any).type || p.category || (p as any).product_category || (p as any).categoryName
+      );
+      return productTypeValue === type;
+    });
+  }
+
   constructor(private api: ApiService) {}
 
   // Base product operations
@@ -26,7 +46,10 @@ export class ProductService {
     return this.api.get<Product[]>('products').pipe(
       map(list => {
         let res = [...(list || [])];
-        if (category && category !== 'all') res = res.filter(p => p.category === category);
+        if (category && category !== 'all') {
+          const targetType = ProductService.normalizeProductType(category === 'bulk' ? 'Bulk' : category === 'readymade' ? 'ReadyMade' : category);
+          res = ProductService.filterProductsByType(res, targetType);
+        }
         if (filters?.lowStock) res = res.filter(p => p.stock <= (filters.lowStockThreshold || 5));
         return res;
       })
@@ -35,8 +58,22 @@ export class ProductService {
 
   getProductById(id: number): Observable<Product | undefined> { return this.api.get<Product>('products', id); }
 
-  addProduct(data: Partial<Product>): Observable<Product> { return this.api.post('products', data); }
-  updateProduct(id: number, data: Partial<Product>): Observable<Product | undefined> { return this.api.patch('products', id, data); }
+  addProduct(data: Partial<Product>): Observable<Product> {
+    const normalizedProduct = {
+      ...data,
+      productType: ProductService.normalizeProductType((data as any).productType || data.category || 'ReadyMade'),
+      category: (data as any).category || ProductService.normalizeProductType((data as any).productType || 'ReadyMade').toLowerCase()
+    };
+    return this.api.post('products', normalizedProduct);
+  }
+  updateProduct(id: number, data: Partial<Product>): Observable<Product | undefined> {
+    const normalizedProduct = {
+      ...data,
+      productType: ProductService.normalizeProductType((data as any).productType || data.category || 'ReadyMade'),
+      category: (data as any).category || ProductService.normalizeProductType((data as any).productType || 'ReadyMade').toLowerCase()
+    };
+    return this.api.patch('products', id, normalizedProduct);
+  }
   deleteProduct(id: number): Observable<boolean> { return this.api.delete('products', id).pipe(map(()=>true)); }
 
   toggleProductStatus(id: number) {
@@ -46,9 +83,17 @@ export class ProductService {
   }
 
   // Admin-specific pricing (adminProducts)
-  // Admin-specific product listing: products table stores adminId
-  listAdminProducts(adminId:number) {
-    return this.api.get<any[]>('products').pipe(map(list => (list||[]).filter(x=>x.adminId==adminId)));
+  // Admin-specific product listing: products table stores adminId and category, not always productType.
+  listAdminProducts(adminId:number, productType?: 'Bulk' | 'ReadyMade') {
+    return this.api.get<any[]>('products', undefined, { adminId }).pipe(
+      map(list => {
+        let res = (list || []).filter(x => String(x.adminId ?? x.shopOwnerId ?? '') === String(adminId));
+        if (productType) {
+          res = ProductService.filterProductsByType(res as Product[], productType);
+        }
+        return res;
+      })
+    );
   }
 
   getAdminProduct(id:number){ return this.api.get<any>('adminProducts', id); }

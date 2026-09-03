@@ -27,29 +27,61 @@ export class EditProductComponent implements OnInit {
       const id = pm.get('id');
       if (!id) return;
       this.svc.getProductById(+id).subscribe(p => {
-        // normalize images editing field
         if (p && Array.isArray(p.images)) (p as any).imagesString = p.images.join(',');
         this.product = p;
-        const current = this.auth.getCurrentUser();
-        this.isOwner = !!(current && p && current.id === p.adminId);
+
+        const current = this.auth.getCurrentUser() || this.getStoredUser();
+        const currentUserId = this.normalizeUserId(current?.id ?? current?.userId ?? current?.adminId ?? '');
+        const productAdminId = this.normalizeUserId((p as any)?.adminId ?? '');
+        const role = (current?.role || current?.userRole || '').toString().toLowerCase();
+        const isAdminRole = role === 'admin' || role === 'superadmin';
+        this.isOwner = isAdminRole && (!productAdminId || currentUserId === productAdminId || !productAdminId);
+
         if (!this.isOwner) {
-          // not owner -> redirect back to list
-          alert('You are not authorized to edit this product.');
+          alert('You do not have permission to edit this product.');
           this.router.navigate(['/admin/products']);
         }
       });
     });
   }
 
+  private normalizeUserId(value: any): string {
+    return String(value ?? '').trim().toLowerCase();
+  }
+
+  private getStoredUser(): any | null {
+    try {
+      const raw = localStorage.getItem('currentUser');
+      return raw ? JSON.parse(raw) : null;
+    } catch {
+      return null;
+    }
+  }
+
   save() {
     if (!this.product || !this.product.id) return;
-    // ensure adminId remains unchanged
+
+    const currentUser = this.auth.getCurrentUser() || this.getStoredUser();
+    const currentUserId = this.normalizeUserId(currentUser?.id ?? currentUser?.userId ?? currentUser?.adminId ?? '');
+    const productAdminId = this.normalizeUserId(this.product.adminId ?? '');
+    const role = (currentUser?.role || currentUser?.userRole || '').toString().toLowerCase();
+    const isAdminRole = role === 'admin' || role === 'superadmin';
+
+    if (!isAdminRole || (!!currentUserId && !!productAdminId && currentUserId !== productAdminId)) {
+      alert('You do not have permission to update this product.');
+      return;
+    }
+
     const payload = { ...this.product };
-    // convert imagesString back to images array
     if (payload.imagesString) {
       payload.images = String(payload.imagesString).split(',').map((s: string) => s.trim()).filter(Boolean);
       delete payload.imagesString;
     }
+
+    if (!payload.productType && payload.category) {
+      payload.productType = payload.category === 'bulk' ? 'Bulk' : 'ReadyMade';
+    }
+
     this.svc.updateProduct(this.product.id, payload).subscribe({
       next: () => this.router.navigate(['/admin/products']),
       error: (err) => { console.error('Update failed', err); alert('Failed to update product'); }

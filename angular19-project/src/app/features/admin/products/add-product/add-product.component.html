@@ -1,26 +1,74 @@
-<div class="add-product">
-  <h3>Add Product Here</h3>
+<div class="add-product-shell">
+  <div class="add-product-card">
+    <header class="form-header">
+      <div>
+        <p class="eyebrow">Create Product</p>
+        <h3>{{ tab === 'bulk' ? 'Bulk Product' : 'Ready-Made Product' }}</h3>
+      </div>
+      <button type="button" class="back-btn" (click)="saved()">← Back</button>
+    </header>
 
-  <div class="tabs">
-    <button (click)="tab='custom'">Custom Grinding</button> 
-    <button (click)="tab='readymade'">Readymade</button>
-    <button (click)="tab='bulk'">Bulk Order</button>
-  </div>
- 
-  <div class="field">Enter product name <input [(ngModel)]="name" type="text" /></div>
-  <div class="field">Enter price <input [(ngModel)]="price" type="number"  /></div>
-  <div class="field">Enter stock <input [(ngModel)]="stock" type="number"  /></div>
-  <div class="field"> Enter category <input [(ngModel)]="category" type="text" />  </div>
-  <div class="field"> Enter slug <input [(ngModel)]="slug" type="text" />  </div>
-  <div class="field"> Enter description <input [(ngModel)]="description" type="text" />  </div>
-  <div class="field"> upload image <input [(ngModel)]="images" type="text" />  </div>
-  
-  <div class="field"><button (click)="save()">Save</button></div>
+    <div class="product-tabs">
+      <button type="button" [class.active]="tab === 'bulk'" (click)="setTab('bulk')">📦 Bulk Products</button>
+      <button type="button" [class.active]="tab === 'readymade'" (click)="setTab('readymade')">🛍️ Ready-Made Products</button>
+    </div>
 
+    <div class="form-grid">
+      <div class="field full-width">
+        <label>Product Name</label>
+        <input [(ngModel)]="name" type="text" placeholder="e.g. Wheat Flour" />
+      </div>
 
-  <div class="form-area">
-    <app-custom-grinding-form *ngIf="tab==='custom'" (saved)="saved()"></app-custom-grinding-form>
-    <app-readymade-flour-form *ngIf="tab==='readymade'" (saved)="saved()"></app-readymade-flour-form>
-    <app-bulk-order-form *ngIf="tab==='bulk'" (saved)="saved()"></app-bulk-order-form>
+      <div class="field full-width">
+        <label>Product Image URL</label>
+        <input [(ngModel)]="imageUrl" type="text" placeholder="https://example.com/flour.jpg" />
+      </div>
+
+      <div class="field full-width">
+        <label>Description</label>
+        <textarea [(ngModel)]="description" rows="4" placeholder="A short description of the product"></textarea>
+      </div>
+
+      <div class="field">
+        <label>Category</label>
+        <select [(ngModel)]="category">
+          <option value="bulk">Bulk</option>
+          <option value="readymade">Ready-Made</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Available Stock</label>
+        <input [(ngModel)]="stock" type="number" min="0" />
+      </div>
+
+      <div *ngIf="tab === 'readymade'" class="field">
+        <label>Price (₹)</label>
+        <input [(ngModel)]="price" type="number" min="0" />
+      </div>
+
+      <div *ngIf="tab === 'bulk'" class="field full-width">
+        <label>Package Sizes & Prices</label>
+        <textarea [(ngModel)]="packageSizes" rows="4" placeholder="1 KG: 70, 5 KG: 300, 10 KG: 550, 25 KG: 1200"></textarea>
+      </div>
+
+      <div class="field">
+        <label>Preparation Time</label>
+        <input [(ngModel)]="readyIn" type="text" placeholder="2 Hours" />
+      </div>
+
+      <div class="field">
+        <label>Status</label>
+        <select [(ngModel)]="status">
+          <option value="active">Active</option>
+          <option value="inactive">Inactive</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <button type="button" class="cancel-btn" (click)="saved()">Cancel</button>
+      <button type="button" class="save-btn" (click)="save()">Save Product</button>
+    </div>
   </div>
 </div>

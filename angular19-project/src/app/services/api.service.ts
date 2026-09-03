@@ -37,9 +37,17 @@ export class ApiService {
   }
 
   // Generic CRUD helpers
-  get<T = any>(path: string, id?: string | number): Observable<T> {
+  get<T = any>(path: string, id?: string | number, params?: Record<string, any>): Observable<T> {
     const url = id ? `${this.base.replace(/\/$/, '')}/${path}/${id}` : `${this.base.replace(/\/$/, '')}/${path}`;
-    return this.http.get<T>(url);
+    let httpParams = new HttpParams();
+    if (params) {
+      Object.entries(params).forEach(([key, value]) => {
+        if (value !== undefined && value !== null && value !== '') {
+          httpParams = httpParams.set(key, String(value));
+        }
+      });
+    }
+    return this.http.get<T>(url, params ? { params: httpParams } : undefined);
   }
 
   delete(path: string, id: string | number): Observable<any> {

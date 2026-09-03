@@ -1,48 +1,81 @@
-<div class="admin-products container">
-  <div class="toolbar"><button (click)="addNew()">Add Product</button></div>
-  <div class="grid">
-    <div *ngFor="let p of products" class="card product">
-      <h4>{{p.name}}</h4>
-      <div>₹{{p.price}}</div>
-      <div>Stock: {{p.stock}}</div>
-      <div><button (click)="edit(p.id)">Edit</button></div>
+<div class="product-management-page">
+  <header class="page-header">
+    <div>
+      <p class="eyebrow">Catalog</p>
+      <h1>Product Management</h1>
+      <p class="subtitle">Manage your Bulk and Ready-Made Products</p>
     </div>
-  </div>
-</div>
-<div class="product-list">
-  <div class="header">
-    <h3>Products</h3>
-    <div class="actions">
-      <input placeholder="Search" [(ngModel)]="q" />
-      <button (click)="addNew()">Add New Product</button>
+  </header>
+
+  <section class="product-type-selector" aria-label="Product category selector">
+    <button type="button" class="product-type-card" [class.active]="activeTab === 'bulk'" (click)="setTab('bulk')">
+      <span class="icon">📦</span>
+      <span class="label">Bulk Products</span>
+      <small>Manage bulk items</small>
+    </button>
+
+    <button type="button" class="product-type-card" [class.active]="activeTab === 'readymade'" (click)="setTab('readymade')">
+      <span class="icon">🛍️</span>
+      <span class="label">Ready-Made Products</span>
+      <small>Manage ready products</small>
+    </button>
+  </section>
+
+  <section class="inventory-panel">
+    <div class="panel-header">
+      <div>
+        <h2>{{ tabTitle }}</h2>
+        <p>{{ tabDescription }}</p>
+      </div>
+      <button type="button" class="primary-btn" (click)="addNew()">
+        <span>＋</span> Add New Product
+      </button>
     </div>
-  </div>
 
-  <div class="tabs">
-    <button (click)="category='all'; load()">All</button>
-    <button (click)="category='custom'; load()">Custom Grinding</button>
-    <button (click)="category='readymade'; load()">Readymade</button>
-    <button (click)="category='bulk'; load()">Bulk</button>
-  </div>
+    <div class="table-wrapper">
+      <div *ngIf="products.length === 0" class="empty-state">
+        No {{ isBulkTab ? 'bulk' : 'ready-made' }} products found.
+      </div>
 
-  <table class="products-table">
-    <thead>
-      <tr><th>Image</th><th>Name</th><th>Category</th><th>Price</th><th>Stock</th><th>Status</th><th>Actions</th></tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let p of products">
-        <td>🖼️</td>
-        <td>{{p.name}}</td>
-        <td>{{p.category}}</td>
-        <td>₹{{p.price}}</td>
-        <td>{{p.stock}}</td>
-        <td>{{p.status}}</td>
-        <td>
-          <button (click)="edit(p.id)">Edit</button>
-          <button (click)="remove(p.id)">Delete</button>
-          <button (click)="toggleStatus(p.id)">Toggle Status</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+      <table *ngIf="products.length > 0" class="products-table">
+        <thead>
+          <tr>
+            <th *ngIf="!isBulkTab">Image</th>
+            <th>Product</th>
+            <th *ngIf="isBulkTab">Package</th>
+            <th>Price</th>
+            <th>Stock</th>
+            <th *ngIf="isBulkTab">Prep Time</th>
+            <th *ngIf="!isBulkTab">Ready Time</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let product of products">
+            <td *ngIf="!isBulkTab" class="image-cell">
+              <img [src]="getImage(product)" [alt]="product.name" />
+            </td>
+            <td class="product-name-cell">
+              <strong>{{ product.name }}</strong>
+            </td>
+            <td *ngIf="isBulkTab">{{ getPackageSummary(product) }}</td>
+            <td>₹{{ product.price || 0 }}</td>
+            <td>{{ product.stock }}</td>
+            <td>{{ product.status === 'inactive' ? 'Unavailable' : (product.category === 'bulk' ? '2-3 hrs' : 'Ready') }}</td>
+            <td>
+              <span class="status-badge" [class.inactive]="product.status === 'inactive'">
+                {{ formatStatus(product.status) }}
+              </span>
+            </td>
+            <td class="action-cell">
+              <button type="button" class="secondary-btn" (click)="edit(product.id)">Edit</button>
+              <button type="button" class="ghost-btn" (click)="toggleStatus(product.id)">Activate</button>
+              <button type="button" class="danger-btn" (click)="remove(product.id)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
 </div>

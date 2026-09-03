@@ -14,32 +14,6 @@
       ]
     },
     {
-      "id": "3",
-      "adminId": 1,
-      "name": "Sattu Mix 1kg",
-      "slug": "sattu-mix-1kg",
-      "categoryId": 3,
-      "price": 95,
-      "stock": 200,
-      "description": "Protein rich sattu mix for drinks and rotis.",
-      "images": [
-        "/assets/products/sattu-1kg.jpg"
-      ]
-    },
-    {
-      "id": "10",
-      "adminId": 1,
-      "name": "millet Mix 1kg",
-      "slug": "millet-mix-1kg",
-      "categoryId": 3,
-      "price": 65,
-      "stock": 200,
-      "description": "Protein rich millet mix .",
-      "images": [
-        "/assets/products/millets-1kg.jpg"
-      ]
-    },
-    {
       "id": "4",
       "adminId": 2,
       "name": "Corn Flour 1kg",
@@ -74,45 +48,97 @@
       "id": "6"
     },
     {
-      "adminId": 1,
-      "name": "rice flour ",
-      "slug": "rice-flour",
-      "categoryId": 1,
-      "price": 40.5,
-      "stock": 10,
-      "description": "",
-      "images": [],
-      "category": "custom",
-      "status": "active",
-      "id": "7",
-      "imagesString": ""
-    },
-    {
-      "adminId": 1,
+      "adminId": "1",
       "name": "Wheat flour",
       "slug": "wheat-flour",
-      "categoryId": 1,
-      "price": 45.5,
-      "stock": 10,
-      "description": "",
-      "images": [],
-      "category": "custom",
+      "categoryId": 3,
+      "price": 46,
+      "stock": 100,
+      "description": "wheat flour and rich gluten ",
+      "images": [
+        "https://static.vecteezy.com/system/resources/thumbnails/038/970/297/small_2x/ai-generated-organic-natural-whole-grain-flour-in-sacks-and-wheat-seeds-ears-of-wheat-on-an-old-wooden-floor-photo.jpg"
+      ],
+      "category": "readymade",
       "status": "active",
-      "id": "10",
-      "imagesString": ""
+      "readyIn": "Ready to deliver in 20 minute",
+      "id": "AFTO4wG8UbQ"
     },
     {
-      "adminId": 1,
-      "name": "besan ",
-      "slug": "1",
-      "categoryId": 1,
-      "price": 75,
-      "stock": 10,
-      "description": "demo details ",
-      "images": [],
-      "category": "custom",
+      "adminId": "1",
+      "name": "Wheat flour",
+      "slug": "wheat-flour",
+      "categoryId": 4,
+      "price": 0,
+      "stock": 1000,
+      "description": "wheat flour",
+      "images": [
+        "https://static.vecteezy.com/system/resources/thumbnails/038/970/297/small_2x/ai-generated-organic-natural-whole-grain-flour-in-sacks-and-wheat-seeds-ears-of-wheat-on-an-old-wooden-floor-photo.jpg"
+      ],
+      "category": "bulk",
       "status": "active",
-      "id": "8"
+      "readyIn": "1 day",
+      "packageSizes": {
+        "1 KG": 70,
+        "5 KG": 300,
+        "10 KG": 550,
+        "25 KG": 1200
+      },
+      "id": "0VSxJ5KKhlM"
+    },
+    {
+      "adminId": "1",
+      "name": "Bajari Flour",
+      "slug": "bajari-flour",
+      "categoryId": 3,
+      "price": 52,
+      "stock": 100,
+      "description": "Bajari flour",
+      "images": [
+        "https://th.bing.com/th/id/R.caafd94a469fadb877979f386d72d9a5?rik=qpleRTLi%2fcEb4A&riu=http%3a%2f%2forganicsphere.com%2fcdn%2fshop%2fproducts%2fbajri-flour.jpg%3fv%3d1691084785&ehk=D6U4bytqvlvKrLTBPuVdk9VpWlRqI6nqWPnrYasZlNU%3d&risl=&pid=ImgRaw&r=0"
+      ],
+      "category": "readymade",
+      "status": "active",
+      "readyIn": "30 minute",
+      "id": "oK3wzZY22so"
+    },
+    {
+      "adminId": "1",
+      "name": "Jawari Flour ",
+      "slug": "jawari-flour",
+      "categoryId": 3,
+      "price": 56,
+      "stock": 200,
+      "description": "Jawari Flour",
+      "images": [
+        "https://5.imimg.com/data5/ZF/JN/QW/SELLER-84500358/jowar-flour-sorghum-flour-1000x1000.jpg"
+      ],
+      "category": "readymade",
+      "status": "active",
+      "readyIn": "30 minute",
+      "id": "CxBszpVyi8Q"
+    },
+    {
+      "adminId": "1",
+      "name": "test 2",
+      "slug": "test-2",
+      "productType": "Bulk",
+      "category": "bulk",
+      "categoryId": 4,
+      "price": 0,
+      "stock": 100,
+      "description": "2",
+      "images": [
+        "https://cdn.pixabay.com/photo/2014/06/03/19/38/test-361512_1280.jpg100"
+      ],
+      "status": "active",
+      "readyIn": "Ready to deliver",
+      "packageSizes": {
+        "1 KG": 70,
+        "5 KG": 300,
+        "10 KG": 550,
+        "25 KG": 1200
+      },
+      "id": "cUu9mkMxhjE"
     }
   ],
   "categories": [
@@ -821,6 +847,134 @@
       "updatedAt": "2026-09-02T03:26:04.802Z",
       "id": "z034YLp92Po",
       "acceptedDate": "2026-09-02T03:26:04.802Z",
+      "rejectedDate": null,
+      "rejectionReason": ""
+    },
+    {
+      "userId": 2,
+      "adminId": 1,
+      "status": "accepted",
+      "items": [
+        {
+          "product": "Sattu Mix 1kg",
+          "quantityKg": 3,
+          "pricePerKg": 95,
+          "comment": "",
+          "productComment": "",
+          "name": "Sattu Mix 1kg",
+          "qty": 3,
+          "price": 95
+        },
+        {
+          "product": "Wheat flour",
+          "quantityKg": 3,
+          "pricePerKg": 45.5,
+          "comment": "",
+          "productComment": "",
+          "name": "Wheat flour",
+          "qty": 3,
+          "price": 45.5
+        },
+        {
+          "product": "rice flour ",
+          "quantityKg": 3,
+          "pricePerKg": 40.5,
+          "comment": "",
+          "productComment": "",
+          "name": "rice flour ",
+          "qty": 3,
+          "price": 40.5
+        },
+        {
+          "product": "besan ",
+          "quantityKg": 3,
+          "pricePerKg": 75,
+          "comment": "",
+          "productComment": "",
+          "name": "besan ",
+          "qty": 3,
+          "price": 75
+        }
+      ],
+      "total": 768,
+      "notes": "payment:COD",
+      "comment": "",
+      "instructions": "",
+      "customerComment": "",
+      "additionalComments": "",
+      "paymentMethod": "cod",
+      "deliverySlot": "10am-12pm",
+      "deliveryAddress": {
+        "name": "Asha Sharma",
+        "phone": "9000000000",
+        "line1": "12 Market Street, Bengaluru - 560001"
+      },
+      "createdAt": "2026-09-03T05:37:34.038Z",
+      "updatedAt": "2026-09-03T05:38:25.302Z",
+      "id": "Fq3MuI1dpdM",
+      "acceptedDate": "2026-09-03T05:38:25.302Z",
+      "rejectedDate": null,
+      "rejectionReason": ""
+    },
+    {
+      "userId": 2,
+      "adminId": 1,
+      "status": "accepted",
+      "items": [
+        {
+          "productId": "3",
+          "id": "3",
+          "product": "Sattu Mix 1kg",
+          "quantityKg": 1,
+          "pricePerKg": 95,
+          "comment": "",
+          "productComment": "",
+          "name": "Sattu Mix 1kg",
+          "qty": 1,
+          "price": 95
+        },
+        {
+          "productId": "10",
+          "id": "10",
+          "product": "Wheat flour",
+          "quantityKg": 1,
+          "pricePerKg": 45.5,
+          "comment": "",
+          "productComment": "",
+          "name": "Wheat flour",
+          "qty": 1,
+          "price": 45.5
+        },
+        {
+          "productId": "7",
+          "id": "7",
+          "product": "rice flour ",
+          "quantityKg": 1,
+          "pricePerKg": 40.5,
+          "comment": "",
+          "productComment": "",
+          "name": "rice flour ",
+          "qty": 1,
+          "price": 40.5
+        }
+      ],
+      "total": 181,
+      "notes": "payment:COD | test wishlist removal",
+      "comment": "test wishlist removal",
+      "instructions": "test wishlist removal",
+      "customerComment": "test wishlist removal",
+      "additionalComments": "test wishlist removal",
+      "paymentMethod": "cod",
+      "deliverySlot": "10am-12pm",
+      "deliveryAddress": {
+        "name": "Asha Sharma",
+        "phone": "9000000000",
+        "line1": "12 Market Street, Bengaluru - 560001"
+      },
+      "createdAt": "2026-09-03T05:43:48.341Z",
+      "updatedAt": "2026-09-03T05:46:04.302Z",
+      "id": "lCXY3E_OIdg",
+      "acceptedDate": "2026-09-03T05:46:04.302Z",
       "rejectedDate": null,
       "rejectionReason": ""
     }

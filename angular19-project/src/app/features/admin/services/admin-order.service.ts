@@ -2,10 +2,11 @@ import { Injectable } from '@angular/core';
 import { Observable, forkJoin, of } from 'rxjs';
 import { map, switchMap, tap, catchError } from 'rxjs/operators';
 import { ApiService } from '../../../services/api.service';
+import { WishlistService } from '../../../services/wishlist.service';
 
 @Injectable({ providedIn: 'root' })
 export class AdminOrderService {
-  constructor(private api: ApiService) {}
+  constructor(private api: ApiService, private wishlistService: WishlistService) {}
 
   getOrders(filters?: any, page = 1): Observable<any[]> {
     // basic: return all orders; json-server supports ?q=
@@ -98,7 +99,24 @@ export class AdminOrderService {
     return this.api.patch('orders', orderId, payload);
   }
 
-  acceptOrder(orderId:number): Observable<any>{ return this.updateOrderStatus(orderId,'accepted'); }
+  acceptOrder(orderId:number): Observable<any> {
+    return this.api.get<any>('orders', orderId).pipe(
+      switchMap(order => this.updateOrderStatus(orderId, 'accepted').pipe(
+        map(updated => {
+          if (Array.isArray(order?.items)) {
+            order.items.forEach((item: any) => {
+              const productId = item.productId || item.id || item.product?.id || item.name;
+              if (productId) {
+                this.wishlistService.removeByProductId(productId);
+              }
+            });
+          }
+          return updated;
+        })
+      ))
+    );
+  }
+
   rejectOrder(orderId:number, reason?:string): Observable<any>{ return this.updateOrderStatus(orderId,'rejected', reason || 'Rejected by flour owner'); }
   cancelOrder(orderId:number, reason?:string): Observable<any>{ return this.updateOrderStatus(orderId,'cancelled', reason || 'Cancelled by flour owner'); }
 

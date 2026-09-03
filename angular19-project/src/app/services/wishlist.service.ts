@@ -77,6 +77,12 @@ export class WishlistService {
     this.persist([]);
   }
 
+  removeByProductId(productId: string | number): WishlistItem[] {
+    const items = this.itemsSubject.value.filter(item => String(item.productId ?? item.id) !== String(productId));
+    this.persist(items);
+    return items;
+  }
+
   private loadFromStorage(): WishlistItem[] {
     try {
       const raw = localStorage.getItem(this.storageKey);

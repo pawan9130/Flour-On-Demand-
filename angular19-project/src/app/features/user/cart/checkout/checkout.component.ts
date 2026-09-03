@@ -43,7 +43,10 @@ export class CheckoutComponent {
       const qty = Number(it.qty || it.quantityKg || it.model?.quantityKg || 1);
       const price = Number(it.price || it.pricePerKg || it.priceBreakup || 0);
       const itemComment = it.model?.comments || it.productComment || it.comment || '';
+      const productId = it.productId || it.id || it.model?.id || it.product?.id || '';
       return {
+        productId,
+        id: productId,
         product: name,
         quantityKg: qty,
         pricePerKg: price,
