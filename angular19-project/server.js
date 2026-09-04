@@ -44,6 +44,15 @@ function getUserFromToken(token) {
   }
 }
 
+function getRequestToken(req) {
+  const authHeader = req.headers.authorization || req.query.token || '';
+  return authHeader.replace(/^Bearer\s+/i, '') || authHeader;
+}
+
+function isAdminProductRequest(req) {
+  return /^(admin|superadmin)-/.test(getRequestToken(req));
+}
+
 // CORS-friendly response for unknown routes
 server.use((req, res, next) => {
   // allow client to read Authorization header
@@ -171,8 +180,24 @@ server.post('/orders', requireAuth, (req, res) => {
   for (const it of items) {
     const prod = db.get('products').find({ id: it.productId }).value();
     if (!prod) return res.status(400).json({ error: `Product ${it.productId} not found` });
+    if (String(prod.status || 'active').toLowerCase() !== 'active') {
+      return res.status(400).json({ error: `${prod.name} is currently unavailable` });
+    }
+    if (req.body.customFlour && String(prod.adminId ?? prod.shopOwnerId ?? '') !== String(req.body.adminId ?? '')) {
+      return res.status(400).json({ error: `${prod.name} is not sold by the selected flour owner` });
+    }
+    if (req.body.customFlour) {
+      const type = String(prod.productType || prod.category || '').toLowerCase().replace(/[-_\s]+/g, '');
+      if (!['customflourproduct', 'customflour', 'customgrinding'].includes(type)) {
+        return res.status(400).json({ error: `${prod.name} is not a custom flour ingredient` });
+      }
+    }
     if (prod.stock < it.qty) return res.status(400).json({ error: `Insufficient stock for ${prod.name}` });
     total += (prod.price * it.qty);
+  }
+
+  if (Math.abs(total - Number(req.body.total || 0)) > 0.01) {
+    return res.status(400).json({ error: 'Order total does not match current product prices' });
   }
 
   // deduct stock
@@ -192,6 +217,68 @@ server.post('/orders', requireAuth, (req, res) => {
   }
 
   res.status(201).json(order);
+});
+
+// User-facing product reads must never expose inactive products. Admin requests
+// retain the complete catalog so products can be reactivated.
+server.get('/products', (req, res) => {
+  let products = router.db.get('products').value() || [];
+
+  if (!isAdminProductRequest(req)) {
+    products = products.filter(product => String(product.status || 'active').toLowerCase() === 'active');
+  }
+
+  if (req.query.adminId != null) {
+    products = products.filter(product => String(product.adminId ?? product.shopOwnerId ?? '') === String(req.query.adminId));
+  }
+
+  res.json(products);
+});
+
+server.get('/products/:id', (req, res) => {
+  const product = router.db.get('products').find({ id: req.params.id }).value();
+  if (!product) return res.status(404).json({ error: 'Product not found' });
+  if (!isAdminProductRequest(req) && String(product.status || 'active').toLowerCase() !== 'active') {
+    return res.status(404).json({ error: 'Product not found' });
+  }
+  res.json(product);
+});
+
+server.post('/products', (req, res) => {
+  const db = router.db;
+  const body = { ...(req.body || {}) };
+  const rawType = String(body.productType || body.category || 'ReadyMade').trim().toLowerCase().replace(/[-_\s]+/g, '');
+  const productType = rawType === 'bulk' || rawType === 'bulkorder'
+    ? 'Bulk'
+    : rawType === 'customflourproduct' || rawType === 'customflour' || rawType === 'customgrinding'
+      ? 'CustomFlourProduct'
+      : 'ReadyMade';
+  body.productType = productType;
+  if (!body.category) body.category = productType === 'Bulk' ? 'bulk' : productType === 'CustomFlourProduct' ? 'custom-flour-product' : 'readymade';
+  if (body.status == null) body.status = 'active';
+  if (body.id == null) body.id = `p-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`;
+  db.get('products').push(body).write();
+  res.status(201).json(body);
+});
+
+server.patch('/products/:id', (req, res) => {
+  const db = router.db;
+  const product = db.get('products').find(item => String(item.id) === String(req.params.id)).value();
+  if (!product) return res.status(404).json({ error: 'Product not found' });
+
+  const body = { ...(req.body || {}) };
+  const productType = body.productType || product.productType || product.category || 'ReadyMade';
+  const normalizedType = productType.toString().trim().toLowerCase().replace(/[-_\s]+/g, '');
+  const canonicalType = normalizedType === 'bulk' || normalizedType === 'bulkorder'
+    ? 'Bulk'
+    : normalizedType === 'customflourproduct' || normalizedType === 'customflour' || normalizedType === 'customgrinding' || normalizedType === 'custom'
+      ? 'CustomFlourProduct'
+      : 'ReadyMade';
+
+  body.productType = canonicalType;
+  if (!body.category) body.category = canonicalType === 'Bulk' ? 'bulk' : canonicalType === 'CustomFlourProduct' ? 'custom-flour-product' : 'readymade';
+  db.get('products').find(item => String(item.id) === String(req.params.id)).assign(body).write();
+  res.json(db.get('products').find(item => String(item.id) === String(req.params.id)).value());
 });
 
 // Image upload endpoint (accepts base64 payload)

@@ -2,8 +2,8 @@
   <div class="add-product-card">
     <header class="form-header">
       <div>
-        <p class="eyebrow">Create Product</p>
-        <h3>{{ tab === 'bulk' ? 'Bulk Product' : 'Ready-Made Product' }}</h3>
+        <p class="eyebrow">{{ isEditMode ? 'Update Product' : 'Create Product' }}</p>
+        <h3>{{ isEditMode ? 'Edit ' : '' }}{{ tab === 'bulk' ? 'Bulk Product' : tab === 'custom' ? 'Custom Flour Product' : 'Ready-Made Product' }}</h3>
       </div>
       <button type="button" class="back-btn" (click)="saved()">← Back</button>
     </header>
@@ -11,6 +11,7 @@
     <div class="product-tabs">
       <button type="button" [class.active]="tab === 'bulk'" (click)="setTab('bulk')">📦 Bulk Products</button>
       <button type="button" [class.active]="tab === 'readymade'" (click)="setTab('readymade')">🛍️ Ready-Made Products</button>
+      <button type="button" [class.active]="tab === 'custom'" (click)="setTab('custom')">🌾 Custom Flour Product</button>
     </div>
 
     <div class="form-grid">
@@ -31,9 +32,10 @@
 
       <div class="field">
         <label>Category</label>
-        <select [(ngModel)]="category">
+        <select [(ngModel)]="category" (ngModelChange)="setCategory($event)">
           <option value="bulk">Bulk</option>
           <option value="readymade">Ready-Made</option>
+          <option value="custom">Custom Flour Product</option>
         </select>
       </div>
 
@@ -42,7 +44,7 @@
         <input [(ngModel)]="stock" type="number" min="0" />
       </div>
 
-      <div *ngIf="tab === 'readymade'" class="field">
+      <div *ngIf="tab !== 'bulk'" class="field">
         <label>Price (₹)</label>
         <input [(ngModel)]="price" type="number" min="0" />
       </div>
@@ -53,8 +55,8 @@
       </div>
 
       <div class="field">
-        <label>Preparation Time</label>
-        <input [(ngModel)]="readyIn" type="text" placeholder="2 Hours" />
+        <label>Preparation Time (Minutes/Hours)</label>
+        <input [(ngModel)]="readyIn" type="text" />
       </div>
 
       <div class="field">
@@ -68,7 +70,7 @@
 
     <div class="form-actions">
       <button type="button" class="cancel-btn" (click)="saved()">Cancel</button>
-      <button type="button" class="save-btn" (click)="save()">Save Product</button>
+      <button type="button" class="save-btn" (click)="save()">{{ isEditMode ? 'Update' : 'Save Product' }}</button>
     </div>
   </div>
 </div>

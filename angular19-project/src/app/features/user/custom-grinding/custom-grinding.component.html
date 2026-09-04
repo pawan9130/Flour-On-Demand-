@@ -1,35 +1,40 @@
-<div class="wizard">
-  <div class="steps">Step {{step}} / 4</div>
+<main class="custom-page">
+  <header class="page-header">
+    <a routerLink="/user/dashboard">&larr; Dashboard</a>
+    <p class="eyebrow">Custom Flour Studio</p>
+    <h1>Build your own flour blend</h1>
+    <p>Choose a local flour owner, select active ingredients, and create a blend made for you.</p>
+  </header>
 
-  <div *ngIf="step===1">
-    <h3>Select Grains</h3>
-    <app-grain-selector [available]="availableGrains" (change)="onGrainsChange($event)"></app-grain-selector>
-  </div>
+  <section *ngIf="!selectedAdmin" class="section-block">
+    <div class="section-title"><span>01</span><div><h2>Choose a flour owner</h2><p>Only active flour owners are shown.</p></div></div>
+    <div *ngIf="loading" class="empty">Loading flour owners...</div>
+    <div *ngIf="!loading && !admins.length" class="empty">No active flour owners are available.</div>
+    <div class="admin-grid">
+      <button *ngFor="let admin of admins" type="button" class="admin-card" (click)="selectAdmin(admin)">
+        <span class="admin-avatar">{{ (admin.shopName || admin.name || 'F').charAt(0) }}</span>
+        <span><strong>{{ admin.shopName || admin.name }}</strong><small>{{ admin.area || admin.address || 'Local flour owner' }}</small></span>
+        <span class="arrow">&rarr;</span>
+      </button>
+    </div>
+  </section>
 
-  <div *ngIf="step===2">
-    <h3>Grinding Options</h3>
-    <app-grinding-options (select)="onGrindingSelect($event)"></app-grinding-options>
-  </div>
+  <div *ngIf="selectedAdmin" class="workspace">
+    <button type="button" class="change-admin" (click)="selectedAdmin = null">&larr; Change flour owner</button>
+    <div class="owner-banner"><span class="admin-avatar">{{ (selectedAdmin.shopName || selectedAdmin.name || 'F').charAt(0) }}</span><div><small>Selected flour owner</small><strong>{{ selectedAdmin.shopName || selectedAdmin.name }}</strong></div></div>
+    <div *ngIf="!products.length" class="empty">No active Custom Flour Products are available from this owner.</div>
 
-  <div *ngIf="step===3">
-    <h3>Multigrain Addons</h3>
-    <app-multigrain-addon [addons]="addons" (change)="onAddonsChange($event)"></app-multigrain-addon>
+    <section *ngIf="products.length" class="section-block">
+      <div class="section-title"><span>02</span><div><h2>Build your blend</h2><p>All prices are calculated per kilogram.</p></div></div>
+      <div class="blend-grid">
+        <div class="selection-panel">
+          <label class="field"><span>Primary Grain</span><select [ngModel]="primary.product" (ngModelChange)="selectPrimary($event)"><option [ngValue]="null">Choose a primary grain</option><option *ngFor="let product of products" [ngValue]="product">{{ product.name }} - ₹{{ product.price }}/kg</option></select></label>
+          <div *ngIf="primary.product" class="line-editor primary-editor"><strong>{{ primary.product.name }}</strong><small>{{ primary.product.description || 'Active custom flour ingredient' }}</small><span>₹{{ primary.product.price }}/kg</span><label class="field"><span>Quantity (KG)</span><input type="number" min="0.5" step="0.25" [(ngModel)]="primary.quantity" (ngModelChange)="quantityChanged()" /></label><b>₹{{ primary.product.price * primary.quantity | number:'1.2-2' }}</b></div>
+          <div class="extras-heading"><h3>Additional Grains</h3><button type="button" class="add-button" (click)="addExtra()" [disabled]="!primary.product || extras.length >= products.length - 1">+ Add Extra Grain</button></div>
+          <div *ngFor="let line of extras; let i = index" class="line-editor"><label class="field"><span>Grain</span><select [(ngModel)]="line.product" (ngModelChange)="line.quantity = recommendedQuantity()"><option *ngFor="let product of products" [ngValue]="product" [disabled]="product.id === primary.product?.id">{{ product.name }} - ₹{{ product.price }}/kg</option></select></label><label class="field"><span>Suggested quantity (KG)</span><input type="number" min="0.25" step="0.25" [(ngModel)]="line.quantity" /></label><strong>₹{{ line.product.price * line.quantity | number:'1.2-2' }}</strong><button type="button" class="remove-button" (click)="removeExtra(i)" aria-label="Remove grain">&times;</button></div>
+        </div>
+        <aside class="summary-panel"><p class="eyebrow">03 / Review</p><h2>Your custom flour</h2><div *ngFor="let line of selectedLines" class="summary-line"><span>{{ line.product.name }}<small>{{ line.quantity }} KG &times; ₹{{ line.product.price }}/kg</small></span><strong>₹{{ line.product.price * line.quantity | number:'1.2-2' }}</strong></div><hr /><label class="field"><span>Flour Size / Final Quantity</span><select [(ngModel)]="flourSize" (ngModelChange)="quantityChanged()"><option [ngValue]="1">1 KG</option><option [ngValue]="2">2 KG</option><option [ngValue]="5">5 KG</option><option [ngValue]="10">10 KG</option><option [ngValue]="-1">Custom Quantity</option></select></label><input *ngIf="flourSize === -1" class="custom-size" type="number" min="0.5" step="0.5" [(ngModel)]="customSize" /><p class="total-qty">Total quantity <strong>{{ totalQuantity | number:'1.2-2' }} KG</strong></p><p class="grand-total">Total <strong>₹{{ totalPrice | number:'1.2-2' }}</strong></p><label class="field"><span>Additional Comments</span><textarea [(ngModel)]="comments" rows="4" placeholder="Fine grinding, packaging, or special mixing instructions"></textarea></label><p *ngIf="message" class="message">{{ message }}</p><button type="button" class="place-button" (click)="placeOrder()" [disabled]="!primary.product || placing">{{ placing ? 'Placing Order...' : 'Place Custom Flour Order' }}</button></aside>
+      </div>
+    </section>
   </div>
-
-  <div *ngIf="step===4">
-    <h3>Review & Add to Cart</h3>
-    <div>Total Qty: {{totals.totalQty}} kg</div>
-    <div>Base: ₹{{totals.base}}</div>
-    <div>Grinding: ₹{{totals.grindCharges}}</div>
-    <div>Addons: ₹{{totals.addonCost}}</div>
-    <div><strong>Grand: ₹{{totals.grand}}</strong></div>
-    <label>Special instructions</label>
-    <textarea [formControl]="instructionsControl"></textarea>
-    <button (click)="addToCart()">Add to Cart</button>
-  </div>
-
-  <div class="nav">
-    <button (click)="prev()" [disabled]="step===1">Back</button>
-    <button (click)="next()" *ngIf="step<4">Next</button>
-  </div>
-</div>
+</main>

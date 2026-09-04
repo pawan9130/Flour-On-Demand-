@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { CartService } from '../../../services/cart.service';
 import { WishlistItem, WishlistService } from '../../../services/wishlist.service';
+import { ApiService } from '../../../services/api.service';
 
 @Component({
   selector: 'app-user-wishlist-list',
@@ -93,11 +94,19 @@ export class UserWishlistListComponent implements OnInit {
   items: WishlistItem[] = [];
   orderComment = '';
 
-  constructor(private wishlistService: WishlistService, private cart: CartService, private router: Router) {}
+  constructor(private wishlistService: WishlistService, private cart: CartService, private router: Router, private api: ApiService) {}
 
   ngOnInit(): void {
     this.wishlistService.items$.subscribe(items => {
       this.items = items;
+    });
+    this.api.get<any[]>('products').subscribe(products => {
+      const activeProductIds = new Set(
+        (products || [])
+          .filter(product => product.status === undefined || String(product.status).toLowerCase() === 'active')
+          .map(product => String(product.id))
+      );
+      this.wishlistService.removeInactiveProducts(activeProductIds);
     });
   }
 

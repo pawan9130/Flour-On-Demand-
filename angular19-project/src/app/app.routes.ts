@@ -29,7 +29,7 @@ export const routes: Routes = [
       { path: 'shop/settings', loadComponent: () => import('./features/admin/shop/shop-settings/shop-settings.component').then(m => m.ShopSettingsComponent) },
       { path: 'products', loadComponent: () => import('./features/admin/products/product-list/product-list.component').then(m => m.ProductListComponent) },
       { path: 'products/add', loadComponent: () => import('./features/admin/products/add-product/add-product.component').then(m => m.AddProductComponent) },
-      { path: 'products/edit/:id', loadComponent: () => import('./features/admin/products/edit-product/edit-product.component').then(m => m.EditProductComponent) },
+      { path: 'products/edit/:id', loadComponent: () => import('./features/admin/products/add-product/add-product.component').then(m => m.AddProductComponent) },
       { path: 'order/:id', loadComponent: () => import('./features/admin/orders/order-details/admin-order-details.component').then(m => m.AdminOrderDetailsComponent) },
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
     ]
@@ -67,7 +67,7 @@ export const routes: Routes = [
       { path: 'orders', loadComponent: () => import('./features/user/orders/order-list/order-list.component').then(m => m.OrderListComponent) },
       { path: 'order/:id', loadComponent: () => import('./features/user/orders/order-details/order-details.component').then(m => m.OrderDetailsComponent) },
       { path: 'flour-order', loadComponent: () => import('./components/flour-order/admin-list.component').then(m => m.AdminListComponent) },
-      { path: 'custom-flour-order', loadComponent: () => import('./components/custom-flour-order/custom-flour-order.component').then(m => m.CustomFlourOrderComponent) },
+      { path: 'custom-flour-order', loadComponent: () => import('./features/user/custom-grinding/custom-grinding.component').then(m => m.CustomGrindingComponent) },
       { path: 'flour-order/admin/:id', loadComponent: () => import('./components/flour-order/admin-products.component').then(m => m.AdminProductsComponent) },
       { path: 'order/:productId', loadComponent: () => import('./components/order-page/order-page.component').then(m => m.OrderPageComponent) },
       { path: 'order/status/:orderId', loadComponent: () => import('./components/order-status/order-status.component').then(m => m.OrderStatusComponent) },

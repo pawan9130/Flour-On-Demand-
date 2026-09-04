@@ -3,7 +3,7 @@
     <div>
       <p class="eyebrow">Catalog</p>
       <h1>Product Management</h1>
-      <p class="subtitle">Manage your Bulk and Ready-Made Products</p>
+      <p class="subtitle">Manage Ready-Made, Bulk, and Custom Flour Products</p>
     </div>
   </header>
 
@@ -18,6 +18,12 @@
       <span class="icon">🛍️</span>
       <span class="label">Ready-Made Products</span>
       <small>Manage ready products</small>
+    </button>
+
+    <button type="button" class="product-type-card" [class.active]="activeTab === 'custom'" (click)="setTab('custom')">
+      <span class="icon">🌾</span>
+      <span class="label">Custom Flour Product</span>
+      <small>Manage mix ingredients</small>
     </button>
   </section>
 
@@ -34,35 +40,37 @@
 
     <div class="table-wrapper">
       <div *ngIf="products.length === 0" class="empty-state">
-        No {{ isBulkTab ? 'bulk' : 'ready-made' }} products found.
+        No {{ isBulkTab ? 'bulk' : isCustomTab ? 'custom flour' : 'ready-made' }} products found.
       </div>
 
       <table *ngIf="products.length > 0" class="products-table">
         <thead>
           <tr>
-            <th *ngIf="!isBulkTab">Image</th>
+            <th>Product Type</th>
+            <th>Image</th>
             <th>Product</th>
             <th *ngIf="isBulkTab">Package</th>
             <th>Price</th>
             <th>Stock</th>
-            <th *ngIf="isBulkTab">Prep Time</th>
-            <th *ngIf="!isBulkTab">Ready Time</th>
+            <th>Preparation Time</th>
             <th>Status</th>
             <th>Actions</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let product of products">
-            <td *ngIf="!isBulkTab" class="image-cell">
+            <td>{{ product.productType }}</td>
+            <td class="image-cell">
               <img [src]="getImage(product)" [alt]="product.name" />
             </td>
             <td class="product-name-cell">
               <strong>{{ product.name }}</strong>
             </td>
             <td *ngIf="isBulkTab">{{ getPackageSummary(product) }}</td>
+            <td *ngIf="!isBulkTab">-</td>
             <td>₹{{ product.price || 0 }}</td>
             <td>{{ product.stock }}</td>
-            <td>{{ product.status === 'inactive' ? 'Unavailable' : (product.category === 'bulk' ? '2-3 hrs' : 'Ready') }}</td>
+            <td>{{ product.readyIn || (product.status === 'inactive' ? 'Unavailable' : 'Ready') }}</td>
             <td>
               <span class="status-badge" [class.inactive]="product.status === 'inactive'">
                 {{ formatStatus(product.status) }}

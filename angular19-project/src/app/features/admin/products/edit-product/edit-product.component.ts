@@ -9,11 +9,13 @@ import { AuthService } from '../../../../services/auth.service';
   selector: 'app-edit-product',
   standalone: true,
   imports: [CommonModule, FormsModule],
-  templateUrl: './edit-product.component.html'
+  templateUrl: './edit-product.component.html',
+  styleUrls: ['./edit-product.component.scss']
 })
 export class EditProductComponent implements OnInit {
   product: any = null;
   isOwner = false;
+  saving = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -59,7 +61,7 @@ export class EditProductComponent implements OnInit {
   }
 
   save() {
-    if (!this.product || !this.product.id) return;
+    if (this.saving || !this.product || !this.product.id) return;
 
     const currentUser = this.auth.getCurrentUser() || this.getStoredUser();
     const currentUserId = this.normalizeUserId(currentUser?.id ?? currentUser?.userId ?? currentUser?.adminId ?? '');
@@ -82,9 +84,14 @@ export class EditProductComponent implements OnInit {
       payload.productType = payload.category === 'bulk' ? 'Bulk' : 'ReadyMade';
     }
 
+    this.saving = true;
     this.svc.updateProduct(this.product.id, payload).subscribe({
       next: () => this.router.navigate(['/admin/products']),
-      error: (err) => { console.error('Update failed', err); alert('Failed to update product'); }
+      error: (err) => {
+        this.saving = false;
+        console.error('Update failed', err);
+        alert('Failed to update product');
+      }
     });
   }
 }

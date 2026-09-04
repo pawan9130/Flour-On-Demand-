@@ -53,15 +53,16 @@
       "slug": "wheat-flour",
       "categoryId": 3,
       "price": 46,
-      "stock": 100,
+      "stock": 1000,
       "description": "wheat flour and rich gluten ",
       "images": [
         "https://static.vecteezy.com/system/resources/thumbnails/038/970/297/small_2x/ai-generated-organic-natural-whole-grain-flour-in-sacks-and-wheat-seeds-ears-of-wheat-on-an-old-wooden-floor-photo.jpg"
       ],
       "category": "readymade",
       "status": "active",
-      "readyIn": "Ready to deliver in 20 minute",
-      "id": "AFTO4wG8UbQ"
+      "readyIn": "20",
+      "id": "AFTO4wG8UbQ",
+      "productType": "ReadyMade"
     },
     {
       "adminId": "1",
@@ -130,7 +131,7 @@
       "images": [
         "https://cdn.pixabay.com/photo/2014/06/03/19/38/test-361512_1280.jpg100"
       ],
-      "status": "active",
+      "status": "inactive",
       "readyIn": "Ready to deliver",
       "packageSizes": {
         "1 KG": 70,
@@ -139,6 +140,159 @@
         "25 KG": 1200
       },
       "id": "cUu9mkMxhjE"
+    },
+    {
+      "adminId": "1",
+      "name": "Rice Flour",
+      "slug": "rice-flour",
+      "productType": "ReadyMade",
+      "category": "readymade",
+      "categoryId": 3,
+      "price": 42,
+      "stock": 200,
+      "description": "Rice flour",
+      "images": [
+        "https://blog.sakura.co/wp-content/uploads/2023/10/rice-flour.png"
+      ],
+      "status": "active",
+      "readyIn": "40 minute",
+      "id": "Flx5fM5r9mQ"
+    },
+    {
+      "adminId": "1",
+      "name": "Soyabeans ",
+      "slug": "soyabeans",
+      "productType": "CustomFlourProduct",
+      "category": "custom",
+      "categoryId": 5,
+      "price": 100,
+      "stock": 50,
+      "description": "Rich protein",
+      "images": [
+        "https://tse1.mm.bing.net/th/id/OIP.vob_IBx_91NiJRDx4riutAHaE8?r=0&rs=1&pid=ImgDetMain&o=7&rm=3"
+      ],
+      "status": "active",
+      "readyIn": "20 minute",
+      "id": "5LEB-fUaUOI"
+    },
+    {
+      "adminId": "1",
+      "name": "Chana",
+      "slug": "chana",
+      "productType": "CustomFlourProduct",
+      "category": "custom",
+      "categoryId": 5,
+      "price": 80,
+      "stock": 70,
+      "description": "chana",
+      "images": [
+        "https://tse1.mm.bing.net/th/id/OIP.IuqZ9LVORfLAfnF6pbfHMgHaHa?r=0&rs=1&pid=ImgDetMain&o=7&rm=3"
+      ],
+      "status": "active",
+      "readyIn": "30",
+      "id": "M2ucHXs8r_c"
+    },
+    {
+      "adminId": "1",
+      "name": "Rice",
+      "slug": "rice",
+      "productType": "CustomFlourProduct",
+      "category": "custom",
+      "categoryId": 5,
+      "price": 60,
+      "stock": 100,
+      "description": "RIce",
+      "images": [
+        "https://static.vecteezy.com/system/resources/previews/003/115/104/non_2x/asian-rice-in-wooden-spoon-free-photo.jpg"
+      ],
+      "status": "active",
+      "readyIn": "30",
+      "id": "ZwZPYPTHWHs"
+    },
+    {
+      "adminId": "1",
+      "name": "Lokwan Wheat",
+      "slug": "lokwan-wheat",
+      "productType": "CustomFlourProduct",
+      "category": "custom",
+      "categoryId": 5,
+      "price": 44,
+      "stock": 200,
+      "description": "lokwan where ",
+      "images": [
+        "https://img.magnific.com/premium-photo/wheat-grains-background-processed-organic-dry-wheat-seeds_157837-1987.jpg"
+      ],
+      "status": "active",
+      "readyIn": "40",
+      "id": "r2B8pBd5aBM"
+    },
+    {
+      "adminId": "1",
+      "name": "Shihor Wheat",
+      "slug": "shihor-wheat",
+      "productType": "CustomFlourProduct",
+      "category": "custom",
+      "categoryId": 5,
+      "price": 56,
+      "stock": 300,
+      "description": "shihore whaet",
+      "images": [
+        "https://5.imimg.com/data5/SELLER/Default/2022/3/KC/XP/BM/36905324/wheat-grains-1000x1000.jpg"
+      ],
+      "status": "active",
+      "readyIn": "Ready to deliver",
+      "id": "5qSn08HUYKQ"
+    },
+    {
+      "adminId": "1",
+      "name": "Jwari ",
+      "slug": "jwari",
+      "productType": "CustomFlourProduct",
+      "category": "custom",
+      "categoryId": 5,
+      "price": 55,
+      "stock": 300,
+      "description": "jawari",
+      "images": [
+        "https://c8.alamy.com/comp/2FYX024/food-background-many-raw-unpolished-sorghum-grains-close-up-2FYX024.jpg"
+      ],
+      "status": "active",
+      "readyIn": "Ready to deliver",
+      "id": "ZZI1CzFchT4"
+    },
+    {
+      "adminId": "1",
+      "name": "Bajari",
+      "slug": "bajari",
+      "productType": "CustomFlourProduct",
+      "category": "custom",
+      "categoryId": 5,
+      "price": 60,
+      "stock": 500,
+      "description": "bajari ",
+      "images": [
+        "https://media.post.rvohealth.io/wp-content/uploads/2020/10/bajra-pearl-millet-grain-732x549-thumbnail.jpg"
+      ],
+      "status": "active",
+      "readyIn": "Ready to deliver",
+      "id": "UgNX3JvxgLQ"
+    },
+    {
+      "adminId": "1",
+      "name": "Nachani ",
+      "slug": "nachani",
+      "productType": "CustomFlourProduct",
+      "category": "custom",
+      "categoryId": 5,
+      "price": 80,
+      "stock": 50,
+      "description": "Nachani",
+      "images": [
+        "https://www.remedyspot.com/wp-content/uploads/2015/12/ragi1.jpg"
+      ],
+      "status": "active",
+      "readyIn": "Ready to deliver",
+      "id": "9Ak_BF97Tac"
     }
   ],
   "categories": [
@@ -390,7 +544,8 @@
       ],
       "total": 237.5,
       "createdAt": "2026-02-27T05:43:40.559Z",
-      "updatedAt": "2026-02-27T05:43:40.559Z"
+      "updatedAt": "2026-09-04T07:16:44.501Z",
+      "notes": "please be ready"
     },
     {
       "id": "56d5",
@@ -972,9 +1127,9 @@
         "line1": "12 Market Street, Bengaluru - 560001"
       },
       "createdAt": "2026-09-03T05:43:48.341Z",
-      "updatedAt": "2026-09-03T05:46:04.302Z",
+      "updatedAt": "2026-09-04T07:18:11.811Z",
       "id": "lCXY3E_OIdg",
-      "acceptedDate": "2026-09-03T05:46:04.302Z",
+      "acceptedDate": "2026-09-04T07:18:11.811Z",
       "rejectedDate": null,
       "rejectionReason": ""
     }
@@ -998,6 +1153,5 @@
       "radiusKm": 10,
       "minOrder": 50
     }
-  },
-  "$schema": "./node_modules/json-server/schema.json"
+  }
 }

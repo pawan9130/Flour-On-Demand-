@@ -124,9 +124,15 @@ export class AdminProductsComponent {
   back(){ history.back(); }
   load(){
     this.apiSvc.get<any[]>('products').subscribe(list => {
-      this.products = (list||[]).filter(p => Number(p.adminId) === Number(this.adminId)).map(p => ({ ...p, _qty: 1 }));
+      this.products = (list || [])
+        .filter(p => Number(p.adminId) === Number(this.adminId) && this.isActiveProduct(p))
+        .map(p => ({ ...p, _qty: 1 }));
     });
     this.apiSvc.get<any>(`admins/${this.adminId}`).subscribe(a=> { this.adminName = a?.shopName || a?.name || 'Seller'; this.adminDetails = a; });
+  }
+
+  private isActiveProduct(product: any): boolean {
+    return String(product?.status || 'active').toLowerCase() === 'active' && !product?.isDeleted && !product?.deleted;
   }
 
   changeQty(p: any, delta: number) {
@@ -146,6 +152,7 @@ export class AdminProductsComponent {
       readyIn: p.readyIn || '30 mins',
       adminId: this.adminId,
       adminName: this.adminName,
+      status: p.status,
       quantity: Number(p._qty || 1),
       productComment: ''
     };
@@ -272,7 +279,9 @@ export class AdminProductsComponent {
   onSearch(e: Event) {
     const q = ((e.target as HTMLInputElement).value || '').toLowerCase();
     this.apiSvc.get<any[]>('products').subscribe(list => {
-      this.products = (list||[]).filter(p => Number(p.adminId) === Number(this.adminId) && (p.name || '').toLowerCase().includes(q)).map(p=> ({ ...p, _qty: p._qty || 1 }));
+      this.products = (list || [])
+        .filter(p => Number(p.adminId) === Number(this.adminId) && this.isActiveProduct(p) && (p.name || '').toLowerCase().includes(q))
+        .map(p => ({ ...p, _qty: p._qty || 1 }));
     });
   }
 }

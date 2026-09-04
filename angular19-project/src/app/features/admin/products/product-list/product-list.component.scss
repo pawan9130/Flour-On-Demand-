@@ -38,7 +38,7 @@
 
 .product-type-selector {
   display: grid;
-  grid-template-columns: repeat(2, minmax(260px, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 20px;
   margin-bottom: 28px;
 }
@@ -81,6 +81,7 @@
   font-size: clamp(1.15rem, 1.8vw, 1.5rem);
   font-weight: 800;
   line-height: 1.25;
+  overflow-wrap: anywhere;
 }
 
 .product-type-card small {
@@ -261,9 +262,7 @@
     padding: 16px;
   }
 
-  .product-type-selector {
-    grid-template-columns: 1fr;
-  }
+  .product-type-selector { grid-template-columns: 1fr; }
 
   .panel-header {
     flex-direction: column;

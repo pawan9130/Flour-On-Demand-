@@ -17,6 +17,7 @@ export interface WishlistItem {
   adminName?: string;
   quantity?: number;
   productComment?: string;
+  status?: string;
   createdAt?: string;
   updatedAt?: string;
 }
@@ -79,6 +80,12 @@ export class WishlistService {
 
   removeByProductId(productId: string | number): WishlistItem[] {
     const items = this.itemsSubject.value.filter(item => String(item.productId ?? item.id) !== String(productId));
+    this.persist(items);
+    return items;
+  }
+
+  removeInactiveProducts(activeProductIds: Set<string>): WishlistItem[] {
+    const items = this.itemsSubject.value.filter(item => activeProductIds.has(String(item.productId ?? item.id)));
     this.persist(items);
     return items;
   }

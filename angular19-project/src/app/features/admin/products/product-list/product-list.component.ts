@@ -14,23 +14,30 @@ import { AuthService } from '../../../../services/auth.service';
 })
 export class ProductListComponent implements OnInit {
   products: Product[] = [];
-  activeTab: 'readymade' | 'bulk' = 'bulk';
+  activeTab: 'readymade' | 'bulk' | 'custom' = 'bulk';
   q = '';
 
   constructor(private svc: ProductService, private router: Router, private auth: AuthService) {}
 
-  ngOnInit(): void { this.load(); }
+  ngOnInit(): void {
+    const savedTab = localStorage.getItem('adminProductTab');
+    if (savedTab === 'readymade' || savedTab === 'bulk' || savedTab === 'custom') {
+      this.activeTab = savedTab;
+    }
+    this.load();
+  }
 
   get isBulkTab(): boolean { return this.activeTab === 'bulk'; }
+  get isCustomTab(): boolean { return this.activeTab === 'custom'; }
 
   get tabTitle(): string {
-    return this.isBulkTab ? 'Bulk Products' : 'Ready-Made Products';
+    return this.isBulkTab ? 'Bulk Products' : this.isCustomTab ? 'Custom Flour Products' : 'Ready-Made Products';
   }
 
   get tabDescription(): string {
     return this.isBulkTab
       ? 'Manage all your bulk products and package options.'
-      : 'Manage products that are ready for customers to order.';
+      : this.isCustomTab ? 'Manage ingredients for customized flour mixes.' : 'Manage products that are ready for customers to order.';
   }
 
   load() {
@@ -48,7 +55,9 @@ export class ProductListComponent implements OnInit {
         const categoryValue = String(product.productType || product.type || product.category || '').trim().toLowerCase();
         const matchesTab = this.activeTab === 'bulk'
           ? categoryValue === 'bulk' || categoryValue === 'bulkorder' || categoryValue === 'bulk-order'
-          : categoryValue === 'readymade' || categoryValue === 'readymade' || categoryValue === 'ready-made' || categoryValue === 'ready_made';
+          : this.activeTab === 'custom'
+            ? ['customflourproduct', 'customflour', 'customgrinding', 'custom-flour-product'].includes(categoryValue.replace(/[-_\s]+/g, ''))
+            : categoryValue === 'readymade' || categoryValue === 'readymade' || categoryValue === 'ready-made' || categoryValue === 'ready_made';
 
         return matchesAdmin && matchesTab;
       });
@@ -57,7 +66,7 @@ export class ProductListComponent implements OnInit {
     });
   }
 
-  setTab(tab: 'readymade' | 'bulk') {
+  setTab(tab: 'readymade' | 'bulk' | 'custom') {
     this.activeTab = tab;
     localStorage.setItem('adminProductTab', tab);
     this.load();
@@ -68,11 +77,16 @@ export class ProductListComponent implements OnInit {
     this.router.navigate(['/admin/products/add'], { queryParams: { tab: this.activeTab } });
   }
 
-  edit(id: number) { this.router.navigate(['/admin/products/edit', id]); }
+  edit(id: number | string) {
+    localStorage.setItem('adminProductTab', this.activeTab);
+    this.router.navigate(['/admin/products/add'], {
+      queryParams: { tab: this.activeTab, editId: id }
+    });
+  }
 
-  remove(id: number) { if (confirm('Delete product?')) this.svc.deleteProduct(id).subscribe(()=>this.load()); }
+  remove(id: number | string) { if (confirm('Delete product?')) this.svc.deleteProduct(id).subscribe(()=>this.load()); }
 
-  toggleStatus(id: number) { this.svc.toggleProductStatus(id).subscribe(()=>this.load()); }
+  toggleStatus(id: number | string) { this.svc.toggleProductStatus(id).subscribe(()=>this.load()); }
 
   getImage(product: Product): string {
     return product.images?.[0] || 'https://placehold.co/120x90/faf7f2/f1b24a?text=No+Image';
